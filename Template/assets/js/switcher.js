@@ -1,11 +1,11 @@
 jQuery(document).ready(function($) {
-	
-	var colors = '';
-	var server_url = ''; 
-	var folder_url = 'assets/css/colors/'; 
 
-	// Style switcher
- 	$(".hide-color").show(4000);
+    var colors = '';
+    var server_url = '';
+    var folder_url = '/assets/css/colors/';
+
+    // Style switcher
+    $(".hide-color").show(4000);
     $('#custumize-style').animate({
         left: '-134px'
     });
@@ -33,25 +33,25 @@ jQuery(document).ready(function($) {
 
         }
     })
-	
- 
-	
-		
-	//Text Color change:
+
+
+
+
+    //Text Color change:
     $("#custom-color li a").click(function() {
-		if($("#colors-style").length == 0) {
-			$('<link href="" rel="stylesheet" type="text/css" id="colors-style">').appendTo('body');
-		}
-		var color_code = $(this).attr('class');
+        if ($("#colors-style").length == 0) {
+            $('<link href="" rel="stylesheet" type="text/css" id="colors-style">').appendTo('body');
+        }
+        var color_code = $(this).attr('class');
         $(this).parent().parent().find('li').removeClass('active');
-        $("#colors-style").attr("href", folder_url + color_code +".css");
+        $("#colors-style").attr("href", folder_url + color_code + ".css");
         $(this).parent().addClass('active');
         //$.cookie("layout_color", server_url + color_code +".css");
         return false;
-    }); 
-	
-	
-	//Background Image change:	
+    });
+
+
+    //Background Image change:	
     $('#bgimg li a').click(function(e) {
         e.preventDefault();
         $(this).parent().parent().find('a').removeClass('active');
@@ -64,7 +64,7 @@ jQuery(document).ready(function($) {
 
     });
 
-	//Background Solid Color change:	
+    //Background Solid Color change:	
     $('#bgsolid li a').click(function(e) {
         e.preventDefault();
         $(this).parent().parent().find('a').removeClass('active');
@@ -74,56 +74,56 @@ jQuery(document).ready(function($) {
         //$.cookie('layout_bgColors', bg);
 
     });
-	
-	//menu position change:	
+
+    //menu position change:	
     $('.menu-position li a').click(function(e) {
         e.preventDefault();
         $(this).parent().parent().find('a').removeClass('active');
         $(this).addClass('active');
-		var menu_pos = $(this).attr('id');
+        var menu_pos = $(this).attr('id');
         $('#wrapper').removeClass();
         $('#wrapper').addClass('container');
         $('#wrapper').addClass(menu_pos);
         //$.cookie('layout_menuPosition', menu_pos);
     });
-	
-	//container-height change:	
+
+    //container-height change:	
     $('.container-height li a').click(function(e) {
         e.preventDefault();
         $(this).parent().parent().find('a').removeClass('active');
         $(this).addClass('active');
-		var container_height = $(this).attr('id');
-		if(container_height=="container-height-fixed"){
-			$('.main-container').addClass('fixed-height');
-	  		$(".fixed-height .scrollbar").mCustomScrollbar("destroy"); 
-			$(".fixed-height .scrollbar").mCustomScrollbar({
-			  contentTouchScroll: true,
-			  advanced: {
-				updateOnContentResize: true,
-				updateOnBrowserResize: true,
-				autoScrollOnFocus: false
-			  }
-			}); 
-		}else if(container_height=="container-height-auto"){
-	  		$(".fixed-height .scrollbar").mCustomScrollbar("destroy"); 
-			$('.main-container').removeClass('fixed-height');
-		}
+        var container_height = $(this).attr('id');
+        if (container_height == "container-height-fixed") {
+            $('.main-container').addClass('fixed-height');
+            $(".fixed-height .scrollbar").mCustomScrollbar("destroy");
+            $(".fixed-height .scrollbar").mCustomScrollbar({
+                contentTouchScroll: true,
+                advanced: {
+                    updateOnContentResize: true,
+                    updateOnBrowserResize: true,
+                    autoScrollOnFocus: false
+                }
+            });
+        } else if (container_height == "container-height-auto") {
+            $(".fixed-height .scrollbar").mCustomScrollbar("destroy");
+            $('.main-container').removeClass('fixed-height');
+        }
     });
 
-	//button-reset:	
+    //button-reset:	
     $('#button-reset a').click(function(e) {
         $('body').css('background', '#fff');
         // $("#colors-style").attr("href", folder_url + "red.css");
         // $.cookie('layout_color',  server_url + 'red.css');
-		
-		//menu reset:
+
+        //menu reset:
         $('#wrapper').removeClass();
         $('#wrapper').addClass('container');
         $('.menu-position li a').parent().parent().find('a').removeClass('active');
         $('#menu-left-bottom').addClass('active');
         //$.cookie('layout_menuPosition', '');
-		
-		//container-height reset:
+
+        //container-height reset:
         $('#container-height-fixed').trigger('click');
     });
 });

@@ -1,6 +1,6 @@
 # Heroku buildpack: PHP [![Build Status](https://circleci.com/gh/heroku/heroku-buildpack-php.svg?style=svg)](https://circleci.com/gh/heroku/heroku-buildpack-php)
 
-![php](https://cloud.githubusercontent.com/assets/51578/8882982/73ea501a-3219-11e5-8f87-311e6b8a86fc.jpg)
+![php](https://cloud.githubusercontent.com//assets/51578/8882982/73ea501a-3219-11e5-8f87-311e6b8a86fc.jpg)
 
 
 This is the official [Heroku buildpack](http://devcenter.heroku.com/articles/buildpacks) for PHP applications.
