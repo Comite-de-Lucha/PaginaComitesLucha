@@ -3,7 +3,7 @@
 body {
   font-family: "Roboto", sans-serif;
   background: #fff;
-  font-size: 14px;
+  font-size: 20px;
   font-weight: 400;
   box-sizing: border-box;
   -webkit-font-smoothing: subpixel-antialiased;
@@ -1304,7 +1304,7 @@ figure.single-portfolio:hover figcaption {
 }
 
 .single-post p {
-  font-size: 15px;
+  font-size: 20px;
   line-height: 35px;
 }
 
