@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+  <meta name="description" content="">
+  <meta name="author" content="">
+  <link rel="icon" href="/favicon.ico">
+
+  <title>Administración de la página de los comités de lucha</title>
+
+  <!-- Bootstrap core CSS -->
+  <link rel="stylesheet" href="/assets/css/bootstrap.min.css">
+  <link rel="stylesheet" href="/assets/css/style.css">
+  <link rel="stylesheet" href="/assets/css/material.min.css">
+  <link rel="stylesheet" href="/assets/css/ripples.min.css">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link rel="stylesheet" href="/assets/css/font-awesome.min.css">
+
+  <link rel="stylesheet" href="/assets/css/owl.carousel.css">
+  <link rel="stylesheet" href="/assets/css/settings.css">
+  <link rel="stylesheet" href="/assets/css/slicknav.css">
+  <link rel="stylesheet" href="/assets/css/animate.css">
+  
+  <link rel="stylesheet" href="/assets/css/colors/red.css">
+
+  <!-- include summernote css/js -->
+  <link href="/assets/summernote-0.8.18-dist/summernote-lite.min.css" rel="stylesheet">
+
+  <!-- include datepicker-->
+  <link rel="stylesheet" href="/assets/datepicker/jquery.datetimepicker.min.css">
+  <!-- Custom styles for this template -->
+  <link href="/assets/css/admon.css" rel="stylesheet">
+
+
+
+</head>
+
+<body>
+
+  <nav class="navbar navbar-inverse navbar-fixed-top">
+    <div class="container-fluid">
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar"
+          aria-expanded="false" aria-controls="navbar">
+          <span class="sr-only">Navegación</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="index.html">Administración CL</a>
+      </div>
+      <div id="navbar" class="navbar-collapse collapse">
+        <ul class="nav navbar-nav navbar-right">
+          <li><a href="noticias.html">Noticias</a></li>
+          <li><a href="luchadores.html">Coordinación de luchadores</a></li>
+          <li><a href="redesociales.html">Redes sociales</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <div class="container-fluid">
+    <div class="row">
+
+      <div class="col-md-12 col-sm-12 main">
+        <h1 class="page-header">Noticias</h1>
+        <p>Las últimas 3 noticias, ordenadas por fecha, serán presentados en la página inicial</p>
+        <button type="button" class="btn btn-raised btn-primary" onclick="agregarNuevaNoticia()">Agregar nueva noticia</button>
+        <div class="table-responsive">
+          <table class="table table-striped">
+            <thead>
+              <tr>
+                <th>#</th>
+                <th>Header</th>
+                <th>Header</th>
+                <th>Header</th>
+                <th>Header</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>1,001</td>
+                <td>Lorem</td>
+                <td>ipsum</td>
+                <td>dolor</td>
+                <td>sit</td>
+              </tr>
+              <tr>
+                <td>1,002</td>
+                <td>amet</td>
+                <td>consectetur</td>
+                <td>adipiscing</td>
+                <td>elit</td>
+              </tr>
+              <tr>
+                <td>1,003</td>
+                <td>Integer</td>
+                <td>nec</td>
+                <td>odio</td>
+                <td>Praesent</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div id="editar" class="row" style="display: none;">
+          <div class="col-md-12 col-sm-12">
+            <div class="panel panel-primary">
+              <div class="panel-heading">
+                <h3 class="panel-title">Editar la noticia</h3>
+              </div>
+              <div class="panel-body">
+                <form>
+                  <div class="form-group">
+                    <label>Fecha de la noticia</label>
+                    <input type="text" id="fecha_noticia" class="form-control">
+                  </div>
+                  <div class="form-group">
+                    <label>Imagen</label>
+                    <input type="file" class="form-control" id="image_file_noticia"
+                      onChange="cambiarValorImagen(this)" />
+                    <div class="form-text">Usar sólo si desea subir una imagen o cambiar la existente</div>
+                  </div>
+                  <div class="form-group">
+                    <label>Título</label>
+                    <input type="input" id="noticia-titulo" class="form-control"
+                      onfocusout="cambiarValorInput(this,'noticia-titulo-0')">
+                  </div>
+                  <div class="form-group">
+                    <label>Subtítulo</label>
+                    <input type="input" id="noticia-subtitulo" class="form-control"
+                      onfocusout="cambiarValorInput(this,'noticia-subtitulo-0')">
+                  </div>
+                  <div class="form-group">
+                    <label>Texto en el botón</label>
+                    <input type="text" id="noticia-boton" placeholder="Encuentra más información" class="form-control"
+                      onfocusout="cambiarValorInput(this,'noticia-boton-0')">
+                    <div class="form-text">Usar sólo si desea cambiar el texto del botón para ver la noticia</div>
+                  </div>
+                  <div class="form-group">
+                    <label>Noticia completa</label>
+                    <textarea id="descripcion_noticia" name="editordata"></textarea>
+                  </div>
+                  <button type="button" class="btn btn-raised btn-primary" onclick="guardarEvento()">Guardar
+                    Noticia</button>
+                  <div class="alert alert-danger" style="display: none;" role="alert"
+                    id="problema_creando_noticia">
+                    <h4 class="alert-heading">Tuvimos un problema!</h4>
+                    <p>No pudimos crear el evento, por favor probar lo siguiente:
+                    <ul>
+                      <li>Probar con una imagen con menor tamaño</li>
+                      <li>Verificar el tipo de la imagen (png, jpeg, jpg, gif)</li>
+                    </ul>
+                    </p>
+
+                    <hr>
+                    <p class="mb-0">Si este problema persiste por favor comunicarse con el/la administradora de la
+                      página.</p>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-12 col-sm-12">
+            <div class="panel panel-default">
+              <div class="panel-heading">
+                <h3 class="panel-title">Vista Previa</h3>
+              </div>
+              <div class="panel-body">
+                <div id="main-slide" class="carousel slide carousel-fade" data-ride="carousel">
+                  <div class="carousel-inner">
+                      <div class="item active">
+                          <img class="img-responsive" src="/assets/images/slider/slider-bg4.jpg" alt="slider">
+                          <div class="slider-content">
+                              <div class="container">
+                                  <div class="row">
+                                      <div class="col-md-12 text-left">
+                                          <h1 class="slideInLeft  wow hero-heading" >Título</h1>
+                                          <h5 class="fadeInDown wow  hero-sub-heading" >Subtíulo</h5>
+                                          <a href="#" class="fadeInUp wow btn btn-common" ><i class="material-icons">&#xE90F;</i> Encuentra más Información<div
+                                                  class="ripple-container"></div></a>
+                                      </div>
+                                  </div>
+                              </div>
+                          </div>
+                      </div>
+                  </div>
+                  </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Bootstrap core JavaScript
+    ================================================== -->
+  <!-- Placed at the end of the document so the pages load faster -->
+  <script src="/assets/js/jquery-min.js"></script>
+  <script src="/assets/js/bootstrap.min.js"></script>
+  <script src="/assets/js/admonNoticias.js"></script>
+  <script src="/assets/datepicker/jquery.datetimepicker.full.js"></script>
+  <script src="/assets/summernote-0.8.18-dist/summernote-lite.min.js"></script>
+
+  <script src="/assets/js/owl.carousel.min.js"></script>
+
+  <script src="/assets/js/form-validator.min.js"></script>
+  <script src="/assets/js/contact-form-script.min.js"></script>
+  <script src="/assets/js/wow.js"></script>
+  <script src="/assets/js/jquery.slicknav.js"></script>
+</body>
+
+</html>

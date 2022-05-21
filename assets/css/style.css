@@ -1949,3 +1949,7 @@ figure.single-portfolio:hover figcaption {
 .portfolio-details-section .portfolio-details .portfolio-meta li i:hover {
   opacity: 0.6;
 }
+
+.form-text{
+  font-size: 14px;
+}
