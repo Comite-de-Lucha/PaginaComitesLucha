@@ -66,4 +66,6 @@ function completarNoticia(noticia, indice) {
     }
     $("#noticia-imagen-" + indice).attr("src", noticia["url_imagen"]);
     $("#noticia-boton-" + indice).attr("onclick", "irAPaginaInterna('noticias/obtener.html?id=" + noticia["noticias_id"] + "')");
+
+    $("#carrusel-"+indice).css("display", "");
 }
