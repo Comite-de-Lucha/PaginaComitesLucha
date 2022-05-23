@@ -65,7 +65,7 @@ function completarNoticia(noticia, indice) {
         $("#noticia-boton-" + indice).html(noticia["boton"]);
     }
     $("#noticia-imagen-" + indice).attr("src", noticia["url_imagen"]);
-    $("#noticia-boton-" + indice).attr("onclick", "irAPaginaInterna('noticias/obtener.html?id=" + noticia["noticias_id"] + "')");
+    $("#noticia-boton-" + indice).attr("onclick", "irAPaginaInterna('noticias/obtener.php?id=" + noticia["noticia_id"] + "')");
 
     $("#carrusel-"+indice).css("display", "");
 }
