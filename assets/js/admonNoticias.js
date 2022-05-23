@@ -46,6 +46,7 @@ $(document).ready(function() {
 function agregarNuevaNoticia() {
     $("#editar").css("display", "");
     $("#editar").attr("idNoticia", "");
+    $("#fecha_noticia").val("");
     $("#noticia-titulo").val("");
     $("#noticia-subtitulo").val("");
     $("#noticia-boton").val("");
@@ -115,3 +116,48 @@ function guardarNoticia() {
     });
 }
 
+function editar(id) {
+    agregarNuevaNoticia();
+    $.ajax({
+        url: '/php/noticias/get.php',
+        data: { id: id },
+        success: function(data) {
+            var json = $.parseJSON(data);
+            $("#editar").attr("idNoticia", json.noticia_id);
+            $("#noticia-titulo").val(json.titulo);
+            $("#noticia-subtitulo").val(json.subtitulo);
+            $("#noticia-boton").val(json.boton);
+            $('#descripcion_noticia').summernote('code', json.descripcion);
+            $("#fecha_noticia").val(json.fecha);
+            completarNoticia(json, 0);
+        },
+        error: function() {
+            console.log('There was some error performing the AJAX call!');
+        }
+    });
+
+}
+
+function eliminar(id) {
+    $.ajax({
+        url: '/php/noticias/delete.php',
+        data: { id: id },
+        success: function(data) {
+            if (data === "ok") {
+                $("#enlace_noticias")[0].click();
+            } else if (data.includes("location")) {
+                var json = $.parseJSON(data);
+                if (json.location) {
+                    window.location.href = json.location;
+                };
+            } else {
+                console.log('There was some error deleting entity');
+                console.log(data);
+            }
+        },
+        error: function() {
+            console.log('There was some error performing the AJAX call!');
+        }
+    });
+
+}

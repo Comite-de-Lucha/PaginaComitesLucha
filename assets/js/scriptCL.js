@@ -53,3 +53,17 @@ function parsearYoutubeID(enlace) {
         });
     return result;
 }
+
+function completarNoticia(noticia, indice) {
+    $("#noticia-titulo-" + indice).html(noticia["titulo"]);
+    if (noticia["subtitulo"].length>0){
+        $("#noticia-subtitulo-" + indice).html(noticia["subtitulo"]);
+    }else{
+        $("#noticia-subtitulo-" + indice).html("");
+    }
+    if (noticia["boton"].length>0){
+        $("#noticia-boton-" + indice).html(noticia["boton"]);
+    }
+    $("#noticia-imagen-" + indice).attr("src", noticia["url_imagen"]);
+    $("#noticia-boton-" + indice).attr("onclick", "irAPaginaInterna('noticias/obtener.html?id=" + noticia["noticias_id"] + "')");
+}
