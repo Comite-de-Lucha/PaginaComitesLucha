@@ -1953,3 +1953,6 @@ figure.single-portfolio:hover figcaption {
 .form-text{
   font-size: 14px;
 }
+.clickeable{
+  cursor: pointer;
+}

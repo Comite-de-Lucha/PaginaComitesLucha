@@ -1,0 +1,50 @@
+<?php
+
+include_once '../config/configbd.php';
+include_once '../config/configparameters.php';
+
+
+mysqli_report(MYSQLI_REPORT_ERROR | MYSQLI_REPORT_STRICT);
+
+$titulo =  $_POST['titulo_noticia'];
+$subtitulo =  $_POST['subtitulo_noticia'];
+$fecha =  $_POST['fecha_noticia'];
+$boton =  $_POST['boton_noticia'];
+$descripcion =  $_POST['descripcion_noticia'];
+$id =  $_POST['id'];
+
+if (0 < $_FILES['imagen_noticia']['error']) {
+    echo 'Error: ' . $_FILES['imagen_noticia']['error'] . '<br>';
+} else {
+    if (empty($_FILES['imagen_noticia']['name'])) {
+        //Subir datos
+        if (empty($id)) {
+            $stmt = mysqli_prepare($mysqli, "INSERT INTO noticias (titulo, subtitulo, boton, fecha,  descripcion) VALUES (?, ?, ?, ?, ?)");
+            mysqli_stmt_bind_param($stmt, "sssss", $titulo, $subtitulo, $boton, $fecha, $descripcion);
+        } else {
+            $stmt = mysqli_prepare($mysqli, "UPDATE noticias SET titulo=? , subtitulo=?, boton=?, fecha= ?, descripcion = ? WHERE noticia_id = ?");
+            mysqli_stmt_bind_param($stmt, "sssssi", $titulo, $subtitulo, $boton, $fecha, $descripcion, $id);
+        }
+    } else {
+        //Subir archivo
+        $test = explode('.', $_FILES['imagen_noticia']['name']);
+        $extension = end($test);
+        $name = str_replace(' ', '_', $titulo) . rand(100, 999) . '.' . $extension;
+        $location = 'upload/' . $name;
+        move_uploaded_file($_FILES['imagen_noticia']['tmp_name'], $location);
+        $location = $path_noticias . $location;
+
+        //Subir datos
+        if (empty($id)) {
+            $stmt = mysqli_prepare($mysqli, "INSERT INTO noticias (titulo, subtitulo, boton, fecha,  descripcion, url_imagen) VALUES (?, ?, ?, ?, ?, ?)");
+            mysqli_stmt_bind_param($stmt, "ssssss",$titulo, $subtitulo, $boton, $fecha, $descripcion, $location);
+        } else {
+            $stmt = mysqli_prepare($mysqli, "UPDATE noticias SET  titulo=? , subtitulo=?, boton=?, fecha= ?, descripcion = ?, url_imagen = ? WHERE noticia_id = ?");
+            mysqli_stmt_bind_param($stmt, "ssssssi",$titulo, $subtitulo, $boton, $fecha, $descripcion, $location, $id);
+        }
+    }
+    /* execute query */
+    mysqli_stmt_execute($stmt);
+
+    echo 'ok';
+}
