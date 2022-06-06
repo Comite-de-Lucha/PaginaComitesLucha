@@ -1,39 +1,16 @@
-<?php
-//including the database connection file
-include_once("../php/config/configbd.php");
-mysqli_report(MYSQLI_REPORT_ERROR | MYSQLI_REPORT_STRICT);
-
-$stmt = mysqli_prepare($mysqli, "SELECT * FROM noticias WHERE noticia_id = ?");
-mysqli_stmt_bind_param($stmt, 's', $_GET['id']);
-
-/* execute query */
-mysqli_stmt_execute($stmt);
-
-$result = mysqli_stmt_get_result($stmt);
-
-$row = mysqli_fetch_array($result, MYSQLI_ASSOC);
-?>
-<html class="desktop mbr-site-loaded">
+<!doctype html>
+<html class="no-js" lang="">
 
 <head>
-<title>Noticias de los Comités de Lucha</title>
 
-<meta charset="utf-8">
-<meta http-equiv="x-ua-compatible" content="ie=edge">
-<meta name="description" content="Páginas de los Comités de Lucha de Colombia">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
-<link rel="apple-touch-icon" href="apple-touch-icon.png">
+    <title>¿Qué sociedad queremos?</title>
 
-
-    <!--  Essential META Tags -->
-    <meta property="og:title" content="Comités de Lucha. Noticias: <? echo $row["titulo"]?>" />
-    <meta property="og:image" itemprop="image"
-        content="<? echo $row["url_imagen"]?>" />
-    <meta property="og:type" content="website" />
-    <meta property="og:video:type" content="text/html">
-    
-    <meta name="twitter:card" content="summary_large_image" />
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta name="description" content="Páginas de los Comités de Lucha de Colombia">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
+    <link rel="apple-touch-icon" href="apple-touch-icon.png">
 
     <link rel="stylesheet" href="/assets/css/bootstrap.min.css">
     <link rel="stylesheet" href="/assets/css/material.min.css">
@@ -51,18 +28,11 @@ $row = mysqli_fetch_array($result, MYSQLI_ASSOC);
     <link rel="stylesheet" href="/assets/css/font-awesome.min.css">
 
     <link rel="stylesheet" href="/assets/css/estilosCL.css">
-    <style>
-        .page-title-section {
-            position: relative;
-            background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),  url(<? echo $row["url_imagen"]?>) no-repeat scroll center center;
-            background-size: cover;
-        }
-    </style>
 </head>
 
-<body class="clickup-chrome-ext_installed" cz-shortcut-listen="true">
-    
-<header id="header" class="navbar navbar-default affix-top" data-spy="affix" data-offset-top="400">
+<body>
+
+    <header id="header" class="navbar navbar-default affix-top" data-spy="affix" data-offset-top="400">
         <div class="container">
             <div class="navbar-header">
                 <a class="navbar-brand site-logo vertical-align" href="/">
@@ -158,9 +128,8 @@ $row = mysqli_fetch_array($result, MYSQLI_ASSOC);
                 <div class="col-md-12">
                     <div class="title-center">
                         <div class="title-middle">
-                            <h2 class="page-tagline">Noticias y Eventos</h2>
-                            <h1 class="page-title"><? echo $row["titulo"]?></h1>
-                            <h5 class="page-title"><? echo $row["subtitulo"]?></h5>
+                            <h2 class="page-tagline">Acerca de Nosotros</h2>
+                            <h1 class="page-title">¿Qué sociedad queremos?</h1>
                         </div>
                     </div>
                 </div>
@@ -168,20 +137,8 @@ $row = mysqli_fetch_array($result, MYSQLI_ASSOC);
         </div>
     </section>
 
-    <section class="mea-blog-post-page section-padding">
-        <div class="container">
-            <div class="row">
 
-                <div class="single-blog-page col-md-12">
-                    <article class="single-post wow fadeInUp animated" data-wow-delay=".2s">
-                    <? echo $row["descripcion"]?>
-                    </article>
-                </div>
-            </div>
-        </div>
-    </section>
-
-<footer class="mea-footer-section">
+    <footer class="mea-footer-section">
 
         <div class="footer-widget-container">
             <div class="container">
@@ -190,7 +147,7 @@ $row = mysqli_fetch_array($result, MYSQLI_ASSOC);
                     <div class="col-md-3 single-footer-widget wow animated fadeInUp mx-auto" data-wow-delay=".2s">
                         <div class="text-center">
                             <img src="/assets/images/icono.png" width="200px" />
-                            <a id="login" class="btn btn-common" href="#">
+                            <a id="login" class="btn btn-common" href="/admon/index.html">
                                 <i class="material-icons">login</i>Administrar</a>
                         </div>
                     </div>
@@ -286,7 +243,6 @@ $row = mysqli_fetch_array($result, MYSQLI_ASSOC);
             <img src="/assets/images/Preloader.gif" alt="MEA Proloader">
         </div>
     </div>
-
 
 
     <script data-cfasync="false" src="/assets/js/email-decode.min.js"></script>
