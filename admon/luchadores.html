@@ -55,8 +55,8 @@
       </div>
       <div id="navbar" class="navbar-collapse collapse">
         <ul class="nav navbar-nav navbar-right">
-          <li><a id="enlace_noticias" href="noticias.html">Noticias</a></li>
-          <li><a href="luchadores.html">Coordinación de luchadores</a></li>
+          <li><a href="noticias.html">Noticias</a></li>
+          <li><a id="enlace_luchadores" href="luchadores.html">Coordinación de luchadores</a></li>
           <li><a href="actualidad.html">Situación Actual</a></li>
           <li><a href="redesociales.html">Redes sociales</a></li>
         </ul>
@@ -68,14 +68,16 @@
     <div class="row">
 
       <div class="col-md-12 col-sm-12 main">
-        <h1 class="page-header">Noticias</h1>
-        <p>Las últimas 3 noticias, ordenadas por fecha, serán presentados en la página inicial</p>
-        <button type="button" class="btn btn-raised btn-primary" onclick="agregarNuevaNoticia()">Agregar nueva noticia</button>
+        <h1 class="page-header">Coordinación de Luchadores</h1>
+        <p>Se utilizará las prioridades alta, media y baja y el orden cronólogico (más nuevo a más viejo) para mostrar la información asociada a cada categoría</p>
+        <button type="button" class="btn btn-raised btn-primary" onclick="agregarNuevaInformacion()">Agregar nueva información</button>
         <div class="table-responsive">
           <table id="lista_examinar" class="table table-striped">
             <thead>
               <tr>
+                <th>Categoría</th>
                 <th>Título</th>
+                <th>Prioridad</th>
                 <th>Fecha</th>
                 <th>Descripción</th>
                 <th>Editar</th>
@@ -91,44 +93,57 @@
           <div class="col-md-12 col-sm-12">
             <div class="panel panel-primary">
               <div class="panel-heading">
-                <h3 class="panel-title">Editar la noticia</h3>
+                <h3 class="panel-title">Editar la información</h3>
               </div>
               <div class="panel-body">
                 <form>
                   <div class="form-group">
-                    <label>Fecha de la noticia</label>
-                    <input type="text" id="fecha_noticia" class="form-control">
+                    <label>Categorías</label>
+                  <select id="categoria_info" multiple class="form-control">
+                    <option value="arte">Arte para el pueblo</option>
+                    <option value="asambleas">Asambleas populares</option>
+                    <option value="regiones">Coordinación de regiones</option>
+                    <option value="primera_linea">Primera Linea</option>
+                    <option value="mujeres">Mujeres</option>
+                    <option value="etnias">Campesinos, indígenas y etnias</option>
+                  </select>
+                  </div>
+                  <div class="form-group">
+                    <label>Prioridad</label>
+                  <select id="prioridad_info" class="form-control">
+                    <option value="1">Alta</option>
+                    <option value="2" selected>Media</option>
+                    <option value="3">Baja</option>
+                  </select>
+                  </div>
+                  <div class="form-group">
+                    <label>Fecha de la información</label>
+                    <input type="text" id="fecha_info" class="form-control">
                   </div>
                   <div class="form-group">
                     <label>Imagen</label>
-                    <input type="file" class="form-control" id="image_file_noticia"
+                    <input type="file" class="form-control" id="image_file_info"
                       onChange="cambiarValorImagen(this)" />
                     <div class="form-text">Usar sólo si desea subir una imagen o cambiar la existente</div>
                   </div>
                   <div class="form-group">
                     <label>Título</label>
-                    <input type="input" id="noticia-titulo" class="form-control"
-                      onfocusout="cambiarValorInput(this,'noticia-titulo-0')">
+                    <input type="input" id="info-titulo" class="form-control"
+                      onfocusout="cambiarValorInput(this,'info-titulo-0')">
                   </div>
                   <div class="form-group">
                     <label>Subtítulo</label>
-                    <input type="input" id="noticia-subtitulo" class="form-control"
-                      onfocusout="cambiarValorInput(this,'noticia-subtitulo-0')">
+                    <input type="input" id="info-subtitulo" class="form-control"
+                      onfocusout="cambiarValorInput(this,'info-subtitulo-0')">
                   </div>
                   <div class="form-group">
-                    <label>Texto en el botón</label>
-                    <input type="text" id="noticia-boton" placeholder="Encuentra más información" class="form-control"
-                      onfocusout="cambiarValorInput(this,'noticia-boton-0')">
-                    <div class="form-text">Usar sólo si desea cambiar el texto del botón para ver la noticia</div>
+                    <label>Información completa</label>
+                    <textarea id="descripcion_info" name="editordata"></textarea>
                   </div>
-                  <div class="form-group">
-                    <label>Noticia completa</label>
-                    <textarea id="descripcion_noticia" name="editordata"></textarea>
-                  </div>
-                  <button type="button" class="btn btn-raised btn-primary" onclick="guardarNoticia()">Guardar
-                    Noticia</button>
+                  <button type="button" class="btn btn-raised btn-primary" onclick="guardarinformacion()">Guardar
+                    Información</button>
                   <div class="alert alert-danger" style="display: none;" role="alert"
-                    id="problema_creando_noticia">
+                    id="problema_creando_info">
                     <h4 class="alert-heading">Tuvimos un problema!</h4>
                     <p>No pudimos crear el evento, por favor probar lo siguiente:
                     <ul>
@@ -154,15 +169,13 @@
                 <div id="main-slide" class="carousel slide carousel-fade" data-ride="carousel">
                   <div class="carousel-inner">
                       <div class="item active">
-                          <img id="noticia-imagen-0"class="img-responsive" src="/assets/images/slider/slider-bg4.jpg" alt="slider">
+                          <img id="info-imagen-0"class="img-responsive" src="/assets/images/slider/slider-bg4.jpg" alt="slider">
                           <div class="slider-content">
                               <div class="container">
                                   <div class="row">
                                       <div class="col-md-12 text-left">
-                                          <h1 id="noticia-titulo-0" class="slideInLeft  wow hero-heading" >Título</h1>
-                                          <h5 id="noticia-subtitulo-0" class="fadeInDown wow  hero-sub-heading" >Subtítulo</h5>
-                                          <a id="noticia-boton-0"  href="#" class="fadeInUp wow btn btn-common" ><i class="material-icons">&#xE90F;</i> Encuentra más Información<div
-                                                  class="ripple-container"></div></a>
+                                          <h1 id="info-titulo-0" class="slideInLeft  wow hero-heading" >Título</h1>
+                                          <h5 id="info-subtitulo-0" class="fadeInDown wow  hero-sub-heading" >Subtítulo</h5>
                                       </div>
                                   </div>
                               </div>
@@ -184,7 +197,7 @@
   <script src="/assets/js/jquery-min.js"></script>
   <script src="/assets/js/bootstrap.min.js"></script>
   <script src="/assets/js/scriptCL.js"></script>
-  <script src="/assets/js/admonNoticias.js"></script>
+  <script src="/assets/js/admonLuchadores.js"></script>
   <script src="/assets/datepicker/jquery.datetimepicker.full.js"></script>
   <script src="/assets/summernote-0.8.18-dist/summernote-lite.min.js"></script>
 
