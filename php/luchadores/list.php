@@ -15,7 +15,7 @@ if ($neoOffset > 0) {
     $offset = $neoOffset;
 }
 
-$stmt = mysqli_prepare($mysqli, "SELECT * FROM luchadores WHERE activo=true ORDER BY prioridad desc, fecha DESC LIMIT $offset,$limit");
+$stmt = mysqli_prepare($mysqli, "SELECT * FROM luchadores WHERE activo=true ORDER BY prioridad ASC, fecha DESC LIMIT $offset,$limit");
 //mysqli_stmt_bind_param($stmt,'variable', $limit);
 
 /* execute query */
