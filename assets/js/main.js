@@ -27,9 +27,6 @@ $(document).ready(function() {
 	});
 	wow.init();
 	
-	// MixitUp Init
-	$('#mea-portfolio').mixItUp(); 
-	
 
  	// Bootstrap Carousel
 	$('#main-slide').carousel({

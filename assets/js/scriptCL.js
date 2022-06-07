@@ -69,3 +69,23 @@ function completarNoticia(noticia, indice) {
 
     $("#carrusel-"+indice).css("display", "");
 }
+
+function cargarInformacionLuchadores(info){
+    var html = '<div class="col-md-3 col-sm-6 col-xs-12 no-padding mix '+info["categoria"]+'">'+
+    '<figure class="single-portfolio">'+
+        '<img class="img-responsive" src="'+info["url_imagen"]+'" alt="">'+
+        '<figcaption class="hover-content">'+
+            '<a class="btn btn-round btn-fab btn-xs" href="noticias/obtener.php?id='+info["luchadores_id"]+'">'+
+            '<i class="material-icons">&#xE5C8;</i>'+
+                '<div class="ripple-container"></div>'+
+           '</a>'+
+            '<a href="noticias/obtener.php?id='+info["luchadores_id"]+'">'+
+                '<h2 class="subtitle">'+info["titulo"]+'</h2>'+
+            '</a>'+
+            '<p>'+info["subtitulo"]+'</p>'+
+        '</figcaption>'+
+   '</figure>'+
+    '</div>';
+    return html;
+
+}
