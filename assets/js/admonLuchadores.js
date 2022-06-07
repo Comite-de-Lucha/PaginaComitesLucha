@@ -58,6 +58,11 @@ function agregarNuevaInformacion() {
     $('#descripcion_info').summernote('code', '');
     $("#image_file_info").html('');
     $("#problema_creando_info").css("display", "none");
+    var json = new Object();
+    json.titulo = "Título";
+    json.subtitulo = "Subtítulo";
+    json.url_imagen = '';
+    completarLuchadores(json, 0);
 }
 
 function cambiarValorImagen($this) {
@@ -130,6 +135,7 @@ function editar(id) {
             $("#info-subtitulo").val(json.subtitulo);
             $('#descripcion_info').summernote('code', json.descripcion);
             $("#fecha_info").val(json.fecha);
+            completarLuchadores(json, 0);
         },
         error: function() {
             console.log('There was some error performing the AJAX call!');
@@ -194,4 +200,15 @@ function selectValuesCategoriaLuchadores(texto){
 
 function selectvaluePrioridad(texto){
     $('#prioridad_info option[value="'+texto+'"]').attr("selected", "selected");
+}
+
+function completarLuchadores(info, indice) {
+    $("#info-titulo-" + indice).html(info["titulo"]);
+    if (info["subtitulo"].length>0){
+        $("#info-subtitulo-" + indice).html(info["subtitulo"]);
+    }else{
+        $("#noticia-subtitulo-" + indice).html("");
+    }
+    
+    $("#info-imagen-" + indice).attr("src", info["url_imagen"]);
 }

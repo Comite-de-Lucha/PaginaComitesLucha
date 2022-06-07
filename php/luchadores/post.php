@@ -23,14 +23,15 @@ if (0 < $_FILES['imagen_info']['error']) {
             $stmt = mysqli_prepare($mysqli, "INSERT INTO luchadores (titulo, subtitulo, categoria, prioridad, fecha,  descripcion) VALUES (?, ?, ?, ?, ?, ?)");
             mysqli_stmt_bind_param($stmt, "sssiss", $titulo, $subtitulo, $categoria, $prioridad, $fecha, $descripcion);
         } else {
-            $stmt = mysqli_prepare($mysqli, "UPDATE luchadores SET titulo=? , subtitulo=?, categoria=?, prioridad=?, fecha= ?, descripcion = ? WHERE noticia_id = ?");
+            $stmt = mysqli_prepare($mysqli, "UPDATE luchadores SET titulo=? , subtitulo=?, categoria=?, prioridad=?, fecha= ?, descripcion = ? WHERE luchadores_id = ?");
             mysqli_stmt_bind_param($stmt, "sssissi", $titulo, $subtitulo,  $categoria, $prioridad, $fecha, $descripcion, $id);
         }
     } else {
         //Subir archivo
         $test = explode('.', $_FILES['imagen_info']['name']);
         $extension = end($test);
-        $name = str_replace(' ', '_', $titulo) . rand(100, 999) . '.' . $extension;
+        $imgtitulo = preg_replace('/[^A-Za-z0-9\-]/', '', $titulo);
+        $name = str_replace(' ', '_', $imgtitulo) . rand(100, 999) . '.' . $extension;
         $location = 'upload/' . $name;
         move_uploaded_file($_FILES['imagen_info']['tmp_name'], $location);
         $location = $path_luchadores . $location;
@@ -40,7 +41,7 @@ if (0 < $_FILES['imagen_info']['error']) {
             $stmt = mysqli_prepare($mysqli, "INSERT INTO luchadores (titulo, subtitulo, categoria, prioridad, fecha,  descripcion, url_imagen) VALUES (?, ?, ?, ?, ?, ?, ?)");
             mysqli_stmt_bind_param($stmt, "sssisss",$titulo, $subtitulo, $categoria, $prioridad, $fecha, $descripcion, $location);
         } else {
-            $stmt = mysqli_prepare($mysqli, "UPDATE luchadores SET  titulo=? , subtitulo=?, categoria=?, prioridad=?, fecha= ?, descripcion = ?, url_imagen = ? WHERE noticia_id = ?");
+            $stmt = mysqli_prepare($mysqli, "UPDATE luchadores SET  titulo=? , subtitulo=?, categoria=?, prioridad=?, fecha= ?, descripcion = ?, url_imagen = ? WHERE luchadores_id = ?");
             mysqli_stmt_bind_param($stmt, "sssisssi",$titulo, $subtitulo, $categoria, $prioridad, $fecha, $descripcion, $location, $id);
         }
     }

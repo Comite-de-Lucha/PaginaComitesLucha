@@ -29,7 +29,8 @@ if (0 < $_FILES['imagen_noticia']['error']) {
         //Subir archivo
         $test = explode('.', $_FILES['imagen_noticia']['name']);
         $extension = end($test);
-        $name = str_replace(' ', '_', $titulo) . rand(100, 999) . '.' . $extension;
+        $imgtitulo = preg_replace('/[^A-Za-z0-9\-]/', '', $titulo);
+        $name = str_replace(' ', '_', $imgtitulo) . rand(100, 999) . '.' . $extension;
         $location = 'upload/' . $name;
         move_uploaded_file($_FILES['imagen_noticia']['tmp_name'], $location);
         $location = $path_noticias . $location;
