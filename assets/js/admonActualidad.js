@@ -47,11 +47,11 @@ $(document).ready(function() {
 
 function agregarNuevaNoticia() {
     $("#editar").css("display", "");
-    $("#editar").attr("idNoticia", "");
+    $("#editar").attr("idActualidad", "");
     $("#fecha_noticia").val("");
     $("#noticia-titulo").val("");
-    $("#noticia-subtitulo").val("");
-    $("#noticia-boton").val("");
+    $("#noticia-autor").val("");
+    $("option:selected").removeAttr("selected");
     $('#descripcion_noticia').summernote('code', '');
     $("#image_file_noticia").html('');
     $("#problema_creando_noticia").css("display", "none");
@@ -88,7 +88,7 @@ function guardarNoticia() {
     data.append('fecha_noticia', $("#fecha_noticia").val());
     data.append('categoria_noticia', $("#noticia_categoria").val());
     data.append('descripcion_noticia', $("#descripcion_noticia").val());
-    data.append('id', $("#editar").attr("idNoticia"));
+    data.append('id', $("#editar").attr("idActualidad"));
 
     $.ajax({
         url: '/php/actualidad/post.php',
@@ -121,23 +121,29 @@ function guardarNoticia() {
 function editar(id) {
     agregarNuevaNoticia();
     $.ajax({
-        url: '/php/noticias/get.php',
+        url: '/php/actualidad/get.php',
         data: { id: id },
         success: function(data) {
             var json = $.parseJSON(data);
-            $("#editar").attr("idNoticia", json.noticia_id);
+            $("#editar").attr("idActualidad", json.actualidad_id);
             $("#noticia-titulo").val(json.titulo);
-            $("#noticia-subtitulo").val(json.subtitulo);
-            $("#noticia-boton").val(json.boton);
+            $("#noticia-autor").val(json.autor);
+            $('#noticia_categoria option[value="'+json.categoria+'"]').attr("selected", "selected");
             $('#descripcion_noticia').summernote('code', json.descripcion);
             $("#fecha_noticia").val(json.fecha);
-            completarNoticia(json, 0);
+            completarActualidad(json, 0);
         },
         error: function() {
             console.log('There was some error performing the AJAX call!');
         }
     });
 
+}
+
+function completarActualidad(info, indice) {
+    $("#noticia-titulo-" + indice).html(info["titulo"]);
+    $("#noticia-autor-" + indice).html(info["autor"]);
+    $("#noticia-imagen-" + indice).attr("src", info["url_imagen"]);
 }
 
 function eliminar(id) {
