@@ -148,11 +148,11 @@ function completarActualidad(info, indice) {
 
 function eliminar(id) {
     $.ajax({
-        url: '/php/noticias/delete.php',
+        url: '/php/actualidad/delete.php',
         data: { id: id },
         success: function(data) {
             if (data === "ok") {
-                $("#enlace_noticias")[0].click();
+                $("#enlace_actualidad")[0].click();
             } else if (data.includes("location")) {
                 var json = $.parseJSON(data);
                 if (json.location) {
