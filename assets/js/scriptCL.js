@@ -70,6 +70,14 @@ function completarNoticia(noticia, indice) {
     $("#carrusel-"+indice).css("display", "");
 }
 
+function completarActualidad(noticia, indice) {
+    $("#actualidad-titulo-" + indice).html(noticia["titulo"]);
+    $("#actualidad-autor-" + indice).html(noticia["autor"]);
+    $("#actualidad-imagen-" + indice).attr("src", ""+noticia["url_imagen"]);
+    $("#actualidad-urlaux-" + indice).attr("href", "actualidad/obtener.php?id=" + noticia["noticia_id"]);
+    $("#actualidad-url-" + indice).attr("href", "actualidad/obtener.php?id=" + noticia["noticia_id"]);
+}
+
 function cargarInformacionLuchadores(info){
     var html = '<div class="col-md-3 col-sm-6 col-xs-12 no-padding mix '+info["categoria"]+'">'+
     '<figure class="single-portfolio">'+

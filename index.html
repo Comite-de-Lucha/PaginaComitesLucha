@@ -339,20 +339,20 @@
 
                             <div class="featured-image">
                                 <a href="#">
-                                    <img src="/assets/images/blog/featured1.png" alt="">
+                                    <img id="actualidad-imagen-0" onerror="this.src='/assets/images/default/noticias.jpeg'" src="..." alt="" style="height:400px;">
                                 </a>
                             </div>
 
                             <div class="post-meta">
 
                                 <div class="read-more-icon">
-                                    <a class="btn btn-round btn-fab" href="blog-single.html"><i class="material-icons">&#xE5C8;</i><div class="ripple-container"></div></a>
+                                    <a id="actualidad-urlaux-0" class="btn btn-round btn-fab" href="blog-single.html"><i class="material-icons">&#xE5C8;</i><div class="ripple-container"></div></a>
                                 </div>
 
-                                <a href="blog-single.html">
-                                    <h2 class="subtitle">Lorem ipsum do lor sit amet, cosectetur adipisicing</h2>
+                                <a id="actualidad-url-0" href="blog-single.html">
+                                    <h2 id="actualidad-titulo-0" class="subtitle">Lorem ipsum do lor sit amet, cosectetur adipisicing</h2>
                                 </a>
-                                <p>by <b><a href="#">Kelly Grover</a></b></p>
+                                <p>por <b><a id="actualidad-autor-0" href="#">Kelly Grover</a></b></p>
                             </div>
                         </article>
                     </div>
@@ -362,20 +362,20 @@
 
                             <div class="featured-image">
                                 <a href="#">
-                                    <img src="/assets/images/blog/featured2.png" alt="">
+                                    <img id="actualidad-imagen-1" onerror="this.src='/assets/images/default/noticias.jpeg'" src="..." alt="" style="height:400px;">
                                 </a>
                             </div>
 
                             <div class="post-meta">
 
                                 <div class="read-more-icon">
-                                    <a class="btn btn-round btn-fab" href="blog-single.html"><i class="material-icons">&#xE5C8;</i><div class="ripple-container"></div></a>
+                                    <a id="actualidad-urlaux-1"  class="btn btn-round btn-fab" href="blog-single.html"><i class="material-icons">&#xE5C8;</i><div class="ripple-container"></div></a>
                                 </div>
 
-                                <a href="blog-single.html">
-                                    <h2 class="subtitle">Lorem ipsum do lor sit amet, cosectetur adipisicing</h2>
+                                <a id="actualidad-url-1" href="blog-single.html">
+                                    <h2 id="actualidad-titulo-1" class="subtitle">Lorem ipsum do lor sit amet, cosectetur adipisicing</h2>
                                 </a>
-                                <p>by <b><a href="#">Kelly Grover</a></b></p>
+                                <p>por <b><a id="actualidad-autor-1" href="#">Kelly Grover</a></b></p>
                             </div>
                         </article>
                     </div>
@@ -385,20 +385,20 @@
 
                             <div class="featured-image">
                                 <a href="#">
-                                    <img src="/assets/images/blog/featured3.png" alt="">
+                                    <img id="actualidad-imagen-2" onerror="this.src='/assets/images/default/noticias.jpeg'" src="..." alt="" style="height:400px;">
                                 </a>
                             </div>
 
                             <div class="post-meta">
 
                                 <div class="read-more-icon">
-                                    <a class="btn btn-round btn-fab" href="blog-single.html"><i class="material-icons">&#xE5C8;</i><div class="ripple-container"></div></a>
+                                    <a id="actualidad-urlaux-2"  class="btn btn-round btn-fab" href="blog-single.html"><i class="material-icons">&#xE5C8;</i><div class="ripple-container"></div></a>
                                 </div>
 
-                                <a href="blog-single.html">
-                                    <h2 class="subtitle">Lorem ipsum do lor sit amet, cosectetur adipisicing</h2>
+                                <a id="actualidad-url-2" href="blog-single.html">
+                                    <h2 id="actualidad-titulo-2" class="subtitle">Lorem ipsum do lor sit amet, cosectetur adipisicing</h2>
                                 </a>
-                                <p>by <b><a href="#">Kelly Grover</a></b></p>
+                                <p>por <b><a id="actualidad-autor-2" href="#">Kelly Grover</a></b></p>
                             </div>
                         </article>
                     </div>
@@ -684,6 +684,25 @@
                 },
                 error: function () {
                     console.log('There was some error performing the fighters AJAX call!');
+                }
+            });
+        });
+
+        $(document).ready(function () {
+            $.ajax({
+                url: '/php/actualidad/list.php',
+                data: { limit: 3 },
+                success: function (data) {
+                    var json = $.parseJSON(data);
+                    var noticia0 = json.resultados[0];
+                    var noticia1 = json.resultados[1];
+                    var noticia2 = json.resultados[2];
+                    completarActualidad(noticia0, 0);
+                    completarActualidad(noticia1, 1);
+                    completarActualidad(noticia2, 2);
+                },
+                error: function () {
+                    console.log('There was some error performing the news AJAX call!');
                 }
             });
         });
