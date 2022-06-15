@@ -74,8 +74,8 @@ function completarActualidad(noticia, indice) {
     $("#actualidad-titulo-" + indice).html(noticia["titulo"]);
     $("#actualidad-autor-" + indice).html(noticia["autor"]);
     $("#actualidad-imagen-" + indice).attr("src", ""+noticia["url_imagen"]);
-    $("#actualidad-urlaux-" + indice).attr("href", "actualidad/obtener.php?id=" + noticia["noticia_id"]);
-    $("#actualidad-url-" + indice).attr("href", "actualidad/obtener.php?id=" + noticia["noticia_id"]);
+    $("#actualidad-urlaux-" + indice).attr("href", "actualidad/obtener.php?id=" + noticia["actualidad_id"]);
+    $("#actualidad-url-" + indice).attr("href", "actualidad/obtener.php?id=" + noticia["actualidad_id"]);
 }
 
 function cargarInformacionLuchadores(info){
