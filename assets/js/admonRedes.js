@@ -1,6 +1,6 @@
 $(document).ready(function() {
     $.ajax({
-        url: '/php/actualidad/list.php',
+        url: '/php/publicacion/list.php',
         data: { limit: 5, offset: (findGetParameter("pagina") - 1) * 5 },
         success: function(data) {
             var json = $.parseJSON(data);
@@ -10,15 +10,11 @@ $(document).ready(function() {
                         '<tr><td>' + 
                         this.categoria +
                         '</td><td>' +
-                        this.titulo +
-                        '</td><td>' +
                         this.fecha +
-                        '</td><td>' +
-                        recortar(this.descripcion, 200) +
                         '</td><td class="text-center">' +
-                        '<span class="clickeable material-icons" onClick="editar(' + this.actualidad_id + ')">edit</span>' +
+                        '<span class="clickeable material-icons" onClick="editar(' + this.publicacion_id + ')">edit</span>' +
                         '</td><td class="text-center">' +
-                        '<span class="clickeable material-icons" onClick="eliminar(' + this.actualidad_id + ')">delete</span>' +
+                        '<span class="clickeable material-icons" onClick="eliminar(' + this.publicacion_id + ')">delete</span>' +
                         '</td></tr>')
                 });
             calcularPaginacion(json.total, findGetParameter("pagina"), '/admon/actualidad.html?');
@@ -102,17 +98,15 @@ function guardarPublicacion() {
 function editar(id) {
     agregarNuevapublicacion();
     $.ajax({
-        url: '/php/actualidad/get.php',
+        url: '/php/publicacion/get.php',
         data: { id: id },
         success: function(data) {
             var json = $.parseJSON(data);
-            $("#editar").attr("idActualidad", json.actualidad_id);
-            $("#publicacion-titulo").val(json.titulo);
-            $("#publicacion-autor").val(json.autor);
+            $("#editar").attr("idPublicacion", json.publicacion_id);
             $('#publicacion_categoria option[value="'+json.categoria+'"]').attr("selected", "selected");
-            $('#descripcion_publicacion').summernote('code', json.descripcion);
+            $('#codigo_publicacion').val(json.codigo);
             $("#fecha_publicacion").val(json.fecha);
-            completarActualidad(json, 0);
+            $("#vista_previa").html(json.codigo);
         },
         error: function() {
             console.log('There was some error performing the AJAX call!');
@@ -121,19 +115,13 @@ function editar(id) {
 
 }
 
-function completarActualidad(info, indice) {
-    $("#publicacion-titulo-" + indice).html(info["titulo"]);
-    $("#publicacion-autor-" + indice).html(info["autor"]);
-    $("#publicacion-imagen-" + indice).attr("src", info["url_imagen"]);
-}
-
 function eliminar(id) {
     $.ajax({
-        url: '/php/actualidad/delete.php',
+        url: '/php/publicacion/delete.php',
         data: { id: id },
         success: function(data) {
             if (data === "ok") {
-                $("#enlace_actualidad")[0].click();
+                $("#enlace_redes")[0].click();
             } else if (data.includes("location")) {
                 var json = $.parseJSON(data);
                 if (json.location) {
