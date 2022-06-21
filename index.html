@@ -430,37 +430,33 @@
 
                         <div class="item active">
 
-                            <div>
-                                <iframe
-                                    src="https://www.facebook.com/plugins/post.php?href=https%3A%2F%2Fwww.facebook.com%2FdNJRLRLQ9-&show_text=true&width=500"
-                                    width="500" height="373" style="border:none;overflow:hidde" scrolling="no"
-                                    frameborder="0" allowfullscreen="true"
-                                    allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"></iframe>
+                            <div id="redes_1">
+                               
                             </div>
                         </div>
 
                         <div class="item">
-                            <div>
-                                <iframe width="560" height="315" src="https://www.youtube.com/embed/C8wH7JuAB1c"
-                                    title="YouTube video player" frameborder="0"
-                                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                                    allowfullscreen></iframe>
+                            <div id="redes_2">
+                               
                             </div>
                         </div>
 
                         <div class="item">
 
-                            <div>
-                                <blockquote class="twitter-tweet">
-                                    <p lang="es" dir="ltr">JORNADA por la NO VIOLENCIA CONTRA LA MUJER en <a href="https://twitter.com/hashtag/Bogota?src=hash&amp;ref_src=twsrc%5Etfw
-                   ">#Bogota</a> / Comités de Lucha ¡PRESENTES Y COMBATIENDO! ✊✊<a
-                                            href="https://twitter.com/hashtag/DiaContralaViolenciadeGenero?src=hash&amp;ref_src=twsrc%5Etfw">#DiaContralaViolenciadeGenero</a>
-                                        <a href="https://t.co/3o6WvrVvIv
-                   ">pic.twitter.com/3o6WvrVvIv</a></p>&mdash; Comités de Lucha (@comitesdelucha) <a
-                                        href="https://twitter.com/comitesdelucha/status/1463980114585305089?ref_src=twsrc%5Etfw">November
-                                        25, 2021</a>
-                                </blockquote>
-                                <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+                            <div id="redes_3">
+                               
+                            </div>
+                        </div>
+                        <div class="item">
+
+                            <div id="redes_4">
+                               
+                            </div>
+                        </div>
+                        <div class="item">
+
+                            <div id="redes_5">
+                               
                             </div>
                         </div>
                     </div>
@@ -700,6 +696,28 @@
                     completarActualidad(noticia0, 0);
                     completarActualidad(noticia1, 1);
                     completarActualidad(noticia2, 2);
+                },
+                error: function () {
+                    console.log('There was some error performing the news AJAX call!');
+                }
+            });
+        });
+        $(document).ready(function () {
+            $.ajax({
+                url: '/php/publicacion/list.php',
+                data: { limit: 5},
+                success: function (data) {
+                    var json = $.parseJSON(data);
+                    var publicacion1 = json.resultados[0];
+                    var publicacion2 = json.resultados[1];
+                    var publicacion3 = json.resultados[2];
+                    var publicacion4 = json.resultados[3];
+                    var publicacion5 = json.resultados[4];
+                    $("#redes_1").html(publicacion1.codigo);
+                    $("#redes_2").html(publicacion2.codigo);
+                    $("#redes_3").html(publicacion3.codigo);
+                    $("#redes_4").html(publicacion4.codigo);
+                    $("#redes_5").html(publicacion5.codigo);
                 },
                 error: function () {
                     console.log('There was some error performing the news AJAX call!');
