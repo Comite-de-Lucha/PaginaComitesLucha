@@ -6,3 +6,18 @@
     display: flex;
     align-items: center;
 }
+
+.banner-quienes-somos{
+    background: url(/assets/images/banners/quienessomos.jpeg) no-repeat scroll center top;
+    background-size: cover;
+}
+
+.banner-plataforma{
+    background: url(/assets/images/banners/plataforma.jpeg) no-repeat scroll center top;
+    background-size: cover;
+}
+
+.banner-que-sociedad{
+    background: url(/assets/images/banners/quesociedad.jpeg) no-repeat scroll center top;
+    background-size: cover;
+}
