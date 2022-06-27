@@ -175,3 +175,11 @@ function completarLuchadores($json){
             $("#ejemplo_noticia").css("display", "none");
         });
 }
+
+function categoriaSeleccionada(categoria){
+    if (typeof(categoria) != "undefined"){
+        categoria="todas";
+    }
+    $("#"+categoria+"_noticias").closest(".btn").removeClass("animated4 btn-common");
+    $("#"+categoria+"_noticias").closest(".btn").addClass("btn-raised btn-primary");
+}

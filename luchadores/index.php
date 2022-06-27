@@ -8,10 +8,14 @@ mysqli_stmt_execute($stmt);
 $result = mysqli_stmt_get_result($stmt);
 $row_array["arte"] =0;
 $row_array["etnias"] =0;
+$row_array["asambleas"] =0;
+$row_array["primera_linea"] =0;
+$row_array["mujeres"] =0;
+$row_array["regiones"] =0;
 while ($row = mysqli_fetch_array($result, MYSQLI_ASSOC)) {
     $categorias = explode(" ",$row['categoria']);
     foreach ($categorias as $categoria) {
-        $row_array[$categoria] = $row['conteo'];
+        $row_array[$categoria] = $row_array[$categoria]+ $row['conteo'];
     }
     
 }
@@ -28,7 +32,7 @@ $row_array["todos"] = $row['conteo'];
 
 <head>
 
-    <title>Próximos eventos - Comités de Lucha</title>
+    <title>Coordinación de luchadores - Comités de Lucha</title>
 
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
@@ -242,33 +246,15 @@ $row_array["todos"] = $row['conteo'];
                         <div class="sidebar-widget-title">
                             <h2>Categorías</h2>
                         </div>
-                        <div class="social-profiles clearfix">
-                        <ul>
-                        <li>
-                                <a href="/luchadores/index.php">Todas <span id="todas_noticias" class="badge"><? echo $row_array["todos"]?></span></a>
-                            </li>
-                            <ul>
-                        <li>
-                                <a href="/luchadores/index.php?categoria=arte">Arte para el pueblo <span id="arte_noticias" class="badge"><? echo $row_array["arte"]?></span</a>
-                            </li>
-                            <li>
-                                <a href="/luchadores/index.php?categoria=asambleas">Asambleas Populares <span id="asambleas_noticias" class="badge"><? echo $row_array["asambleas"]?></span</a>
-                            </li>
-                            <li>
-                                <a href="/luchadores/index.php?categoria=regiones">Coordinación por regiones <span id="regiones_noticias" class="badge"><? echo $row_array["regiones"]?></span</a>
-                            </li>
-                            <li>
-                                <a href="/luchadores/index.php?categoria=primera_linea">Primera Línea <span id="primera_linea_noticias" class="badge"><? echo $row_array["primera_linea"]?></span</a>
-                            </li>
-                            <li>
-                                <a href="/luchadores/index.php?categoria=mujeres">Mujeres <span id="mujeres_noticias" class="badge"><? echo $row_array["mujeres"]?></span</a>
-                            </li>
-                            <li>
-                                <a href="/luchadores/index.php?categoria=etnias">Campesinos, Indígenas y etnias <span id="etnias_noticias" class="badge"><? echo $row_array["etnias"]?></span</a>
-                            </li>
-</ul>
-                        </ul>
-                        </div>
+                        <div class="social-profiles clearfix  wow animated slideInLeft" data-wow-delay=".2s">
+                        <a class="animated4 btn btn-common" href="/luchadores/index.php">Todas <span id="todas_noticias" class="badge"><? echo $row_array["todos"]?></span></a>
+                            <a class="animated4 btn btn-common btn-sm" href="/luchadores/index.php?categoria=arte">Arte para el pueblo <span id="arte_noticias" class="badge"><? echo $row_array["arte"]?></span></a>
+                            <a class="animated4 btn btn-common btn-sm" href="/luchadores/index.php?categoria=asambleas">Asambleas Populares <span id="asambleas_noticias" class="badge"><? echo $row_array["asambleas"]?></span></a>
+                            <a class="animated4 btn btn-common btn-sm" href="/luchadores/index.php?categoria=regiones">Coordinación por regiones <span id="regiones_noticias" class="badge"><? echo $row_array["regiones"]?></span></a>
+                            <a class="animated4 btn btn-common btn-sm" href="/luchadores/index.php?categoria=primera_linea">Primera Línea <span id="primera_linea_noticias" class="badge"><? echo $row_array["primera_linea"]?></span></a>
+                            <a class="animated4 btn btn-common btn-sm" href="/luchadores/index.php?categoria=mujeres">Mujeres <span id="mujeres_noticias" class="badge"><? echo $row_array["mujeres"]?></span></a>
+                            <a class="animated4 btn btn-common btn-sm" href="/luchadores/index.php?categoria=etnias">Campesinos, Indígenas y etnias <span id="etnias_noticias" class="badge"><? echo $row_array["etnias"]?></span></a>
+                 </div>
                     </aside>
                 </div>
             </div>
@@ -402,6 +388,7 @@ $row_array["todos"] = $row['conteo'];
     <script src="/assets/js/scriptCL.js"></script>
     <script>
         $(document).ready(function () {
+            categoriaSeleccionada(findGetParameter("categoria") );
             $.ajax({
                 url: '/php/luchadores/list.php',
                 data: { limit: 12, categoria: findGetParameter("categoria") },
