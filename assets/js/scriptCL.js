@@ -97,3 +97,52 @@ function cargarInformacionLuchadores(info){
     return html;
 
 }
+
+function completarNoticias($json){
+    var indice=0
+    var tiempos=1;
+    $($json.resultados).each(
+        function() {
+            var idDiv="#noticias_columna";
+            if (indice%2===0){
+                idDiv=idDiv+"1";
+            }else{
+                idDiv=idDiv+"2";
+            }
+            var noticia=$("#ejemplo_noticia").clone();
+            noticia.find(".url_noticia").attr("href", "/noticias/obtener.php?id=" + this.noticia_id );
+            noticia.find(".imagen_noticia").attr("src", this.url_imagen);
+            noticia.find(".titulo_noticia").html(this.titulo);
+            noticia.find(".subtitulo_noticia").html(this.subtitulo);
+            noticia.addClass("wow animated fadeInUp");
+            noticia.attr("data-wow-delay", "."+tiempos+"s");
+            noticia.css("display", "");
+            noticia.attr("id", "noticia"+this.noticia_id)
+            $(idDiv).append(noticia);
+            indice = indice+1;
+            tiempos = tiempos+1;
+            $("#ejemplo_noticia").css("display", "none");
+        });
+}
+
+function cargarMasNoticias($this){
+    var offset= parseInt($($this).attr("offset"));
+    $.ajax({
+        url: '/php/noticias/list.php',
+        data: { limit: 10, offset: offset },
+        success: function (data) {
+            var json = $.parseJSON(data);
+            completarNoticias(json);
+            offset = offset+10;
+            if (json.total>offset){
+                $("#cargarMas").css("display", "")
+                $($this).attr("offset", offset);
+            }else{
+                $("#cargarMas").css("display", "none");
+            }
+        },
+        error: function () {
+            console.log('There was some error performing the news AJAX call!');
+        }
+    });
+}

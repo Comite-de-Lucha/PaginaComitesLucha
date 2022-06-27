@@ -78,7 +78,7 @@ $row = mysqli_fetch_array($result, MYSQLI_ASSOC);
                         </div>
                     </li>
                      <li>
-                        <a class="nav-link" href="#" type="button" aria-haspopup="true" aria-expanded="true">Próximos
+                        <a class="nav-link" href="/noticias/index.php" type="button" aria-haspopup="true" aria-expanded="true">Próximos
                             Eventos</a>
                     </li>
                     <li class="dropdown sub-menu">
@@ -123,7 +123,7 @@ $row = mysqli_fetch_array($result, MYSQLI_ASSOC);
                         </ul>
                     </li>
                      <li>
-                        <a href="#">
+                        <a href="/noticias/index.php">
                             Próximos Eventos
                         </a>
                     </li>

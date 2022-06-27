@@ -1,39 +1,16 @@
-<?php
-//including the database connection file
-include_once("../php/config/configbd.php");
-mysqli_report(MYSQLI_REPORT_ERROR | MYSQLI_REPORT_STRICT);
-
-$stmt = mysqli_prepare($mysqli, "SELECT * FROM noticias WHERE noticia_id = ?");
-mysqli_stmt_bind_param($stmt, 's', $_GET['id']);
-
-/* execute query */
-mysqli_stmt_execute($stmt);
-
-$result = mysqli_stmt_get_result($stmt);
-
-$row = mysqli_fetch_array($result, MYSQLI_ASSOC);
-?>
-<html class="desktop mbr-site-loaded">
+<!doctype html>
+<html class="no-js" lang="">
 
 <head>
-<title>Noticias de los Comités de Lucha</title>
 
-<meta charset="utf-8">
-<meta http-equiv="x-ua-compatible" content="ie=edge">
-<meta name="description" content="Páginas de los Comités de Lucha de Colombia">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
-<link rel="apple-touch-icon" href="apple-touch-icon.png">
+    <title>Próximos eventos - Comités de Lucha</title>
 
-
-    <!--  Essential META Tags -->
-    <meta property="og:title" content="Comités de Lucha. Noticias: <? echo $row["titulo"]?>" />
-    <meta property="og:image" itemprop="image"
-        content="<? echo $row["url_imagen"]?>" />
-    <meta property="og:type" content="website" />
-    <meta property="og:video:type" content="text/html">
-    
-    <meta name="twitter:card" content="summary_large_image" />
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta name="description" content="Páginas de los Comités de Lucha de Colombia">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
+    <link rel="apple-touch-icon" href="apple-touch-icon.png">
 
     <link rel="stylesheet" href="/assets/css/bootstrap.min.css">
     <link rel="stylesheet" href="/assets/css/material.min.css">
@@ -51,22 +28,16 @@ $row = mysqli_fetch_array($result, MYSQLI_ASSOC);
     <link rel="stylesheet" href="/assets/css/font-awesome.min.css">
 
     <link rel="stylesheet" href="/assets/css/estilosCL.css">
-    <style>
-        .page-title-section {
-            position: relative;
-            background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),  url(<? echo $row["url_imagen"]?>) no-repeat scroll center center;
-            background-size: cover;
-        }
-    </style>
 </head>
 
-<body class="clickup-chrome-ext_installed" cz-shortcut-listen="true">
-    
-<header id="header" class="navbar navbar-default affix-top" data-spy="affix" data-offset-top="400">
+<body>
+
+    <header id="header" class="navbar navbar-default affix-top" data-spy="affix" data-offset-top="400">
         <div class="container">
             <div class="navbar-header">
                 <a class="navbar-brand site-logo vertical-align" href="/">
-                    <img class="img-responsive img-circle pull-left mt-20" src="/assets/images/icono.png" width="80px" />
+                    <img class="img-responsive img-circle pull-left mt-20" src="/assets/images/icono.png"
+                        width="80px" />
                     <h2 class="pull-left">Comités de Lucha</h2>
                 </a>
             </div>
@@ -84,13 +55,13 @@ $row = mysqli_fetch_array($result, MYSQLI_ASSOC);
                             <a class="sub-menu-item" href="/info/que_sociedad_queremos.html">¿Qué sociedad queremos?</a>
                         </div>
                     </li>
-                     <li>
+                    <li>
                         <a class="nav-link" href="/noticias/index.php" type="button" aria-haspopup="true" aria-expanded="true">Próximos
                             Eventos</a>
                     </li>
                     <li class="dropdown sub-menu">
                         <a a class="dropdown-toggle nav-link" href="#" type="button" id="dropdownMenu2"
-                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">Actualidad</a>
+                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">Actualidad</a>
                         <div class="dropdown-menu sub-menu-panel" aria-labelledby="dropdownMenu2">
                             <a class="sub-menu-item" href="#">Situación actual nacional</a>
                             <a class="sub-menu-item" href="#">Situación actual internacional</a>
@@ -104,9 +75,10 @@ $row = mysqli_fetch_array($result, MYSQLI_ASSOC);
                             <a class="sub-menu-item" href="#">Arte para el pueblo</a>
                             <a class="sub-menu-item" href="#">Asambleas Populares</a>
                             <a class="sub-menu-item" href="#">Coordinación por regiones</a>
-<a class="sub-menu-item" href="#">Primera Línea</a>
+                            <a class="sub-menu-item" href="#">Primera Línea</a>
                             <a class="sub-menu-item" href="#">Mujeres</a>
-                            <a class="sub-menu-item" href="#">Campesinos, Indígenas y etnias</a>                        </div>
+                            <a class="sub-menu-item" href="#">Campesinos, Indígenas y etnias</a>
+                        </div>
                     </li>
 
                 </ul>
@@ -129,7 +101,7 @@ $row = mysqli_fetch_array($result, MYSQLI_ASSOC);
                             </li>
                         </ul>
                     </li>
-                     <li>
+                    <li>
                         <a href="/noticias/index.php">
                             Próximos Eventos
                         </a>
@@ -183,9 +155,7 @@ $row = mysqli_fetch_array($result, MYSQLI_ASSOC);
                 <div class="col-md-12">
                     <div class="title-center">
                         <div class="title-middle">
-                            <h2 class="page-tagline">Noticias y Eventos</h2>
-                            <h1 class="page-title"><? echo $row["titulo"]?></h1>
-                            <h5 class="page-title"><? echo $row["subtitulo"]?></h5>
+                            <h1 class="page-title">Próximos eventos</h1>
                         </div>
                     </div>
                 </div>
@@ -193,20 +163,160 @@ $row = mysqli_fetch_array($result, MYSQLI_ASSOC);
         </div>
     </section>
 
+
     <section class="mea-blog-post-page section-padding">
         <div class="container">
             <div class="row">
 
-                <div class="single-blog-page col-md-12">
-                    <article class="single-post wow fadeInUp animated" data-wow-delay=".2s">
-                    <? echo $row["descripcion"]?>
-                    </article>
+                <div class="col-md-12 blog-post-column">
+
+                    <div id="noticias_columna1" class="col-md-6 no-padding">
+
+                        <div id="ejemplo_noticia" class="col-md-12" data-wow-delay=".2s" style="display:none">
+                            <article class="single-blog-post">
+
+                                <div class="featured-image">
+                                    <a class="url_noticia" href="#">
+                                        <img class="imagen_noticia" src="/assets/images/blog/featured1.png" alt="">
+                                    </a>
+                                </div>
+
+                                <div class="post-meta">
+
+                                    <div class="read-more-icon">
+                                        <a class="btn btn-round btn-fab url_noticia" href="blog-single.html"><i class="material-icons">&#xE5C8;</i><div class="ripple-container"></div></a>
+                                    </div>
+
+                                    <a href="blog-single.html">
+                                        <h2 class="subtitle titulo_noticia">Lorem ipsum do lor sit amet, cosectetur adipisicing</h2>
+                                    </a>
+                                    <p><b class="subtitulo_noticia"></b></p>
+                                </div>
+                            </article>
+                        </div>
+                    </div>
+
+                    <div  id="noticias_columna2" class="col-md-6 no-padding">
+                    </div>
+
+                    <div id="cargarMas" class="col-md-12 text-center mt-30 blog-pagination" style="display:none;">
+                        <a onClick="cargarMasNoticias(this);" offset="10"  href="javascript:void(0)" class="btn btn-common"><i class="material-icons">&#xE028;</i> Cargar más noticias<div class="ripple-container"></div></a>
+                    </div>
+
+                </div>
+
+                <div class="col-md-4 blog-sidebar-column" style="display:none;">
+
+                    <aside class="col-md-12 single-sidebar-widget author-widget no-padding wow animated fadeInUp" data-wow-delay=".2s">
+                        <div class="author-bg">
+                            <img src="/assets/images/blog/author-bg.jpg" alt="">
+                        </div>
+                        <div class="author-info">
+                            <div class="author-name">
+                                <div class="author-intro">
+                                    <h3>Jhon Doe</h3>
+                                    <p>Front End Developer</p>
+                                </div>
+                                <div class="author-image">
+                                    <img src="/assets/images/blog/author.jpg" class="img-circle" alt="">
+                                </div>
+                            </div>
+                            <div class="author-bio">
+                                <p>While you are planning for a trip then you always search for a best place to visit because that time you have looked for many of places in your mind. Same time, when the thought of Shimla comes in your mind, you stop the
+                                    thoughts about other places because the gorgeousness of natural beauty of Shimla.</p>
+                            </div>
+                        </div>
+                    </aside>
+
+                    <aside class="col-md-12 single-sidebar-widget subscribe-widget no-padding  wow animated fadeInUp" data-wow-delay=".3s">
+                        <div class="sidebar-widget-title">
+                            <h2>Follow & Subscribe</h2>
+                        </div>
+                        <div class="social-profiles clearfix">
+                            <div class="footer-contact-widget">
+                                <ul>
+                                    <li>
+                                        <a href="#"><i class="fa fa-facebook"></i></a>
+                                    </li>
+                                    <li>
+                                        <a href="#"><i class="fa fa-twitter"></i></a>
+                                    </li>
+                                    <li>
+                                        <a href="#"><i class="fa fa-dribbble"></i></a>
+                                    </li>
+                                    <li>
+                                        <a href="#"><i class="fa fa-github"></i></a>
+                                    </li>
+                                    <li>
+                                        <a href="#"><i class="fa fa-linkedin"></i></a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="subscribe-box">
+                            <p>Sign up for new Shelver content, updates,<br>surveys & offers.</p>
+                            <div class="input-group">
+                                <input type="email" class="form-control" placeholder="type your email">
+                                <span class="input-group-btn">
+<button class="btn btn-round btn-fab" type="button"><i class="material-icons">&#xE5C8;</i></button>
+</span>
+                            </div>
+                        </div>
+                    </aside>
+
+                    <aside class="col-md-12 single-sidebar-widget instagram-widget no-padding wow animated fadeInUp" data-wow-delay=".3s">
+                        <div class="sidebar-widget-title">
+                            <h2>Instagram Feed</h2>
+                        </div>
+                        <div class="instagram-feed clearfix">
+                            <ul>
+                                <li>
+                                    <a href="#"><img src="/assets/images/Instagram/insta.jpg" alt=""></a>
+                                </li>
+                                <li>
+                                    <a href="#"><img src="/assets/images/Instagram/insta.jpg" alt=""></a>
+                                </li>
+                                <li>
+                                    <a href="#"><img src="/assets/images/Instagram/insta.jpg" alt=""></a>
+                                </li>
+                                <li>
+                                    <a href="#"><img src="/assets/images/Instagram/insta.jpg" alt=""></a>
+                                </li>
+                                <li>
+                                    <a href="#"><img src="/assets/images/Instagram/insta.jpg" alt=""></a>
+                                </li>
+                                <li>
+                                    <a href="#"><img src="/assets/images/Instagram/insta.jpg" alt=""></a>
+                                </li>
+                            </ul>
+                        </div>
+                    </aside>
+
+                    <aside class="col-md-12 single-sidebar-widget flickr-widget no-padding wow animated fadeInUp" data-wow-delay=".4s">
+                        <div class="sidebar-widget-title">
+                            <h2>Flickr Slider</h2>
+                        </div>
+                        <div class="flickr-feed clearfix">
+                            <div id="flickr-carousel" class="owl-carousel owl-theme">
+                                <div class="item active">
+                                    <img src="/assets/images/Instagram/flickr.jpg" alt="">
+                                </div>
+                                <div class="item">
+                                    <img src="/assets/images/Instagram/flickr.jpg" alt="">
+                                </div>
+                                <div class="item">
+                                    <img src="/assets/images/Instagram/flickr.jpg" alt="">
+                                </div>
+                            </div>
+                        </div>
+                    </aside>
                 </div>
             </div>
         </div>
     </section>
 
-<footer class="mea-footer-section">
+
+    <footer class="mea-footer-section">
 
         <div class="footer-widget-container">
             <div class="container">
@@ -215,7 +325,7 @@ $row = mysqli_fetch_array($result, MYSQLI_ASSOC);
                     <div class="col-md-3 single-footer-widget wow animated fadeInUp mx-auto" data-wow-delay=".2s">
                         <div class="text-center">
                             <img src="/assets/images/icono.png" width="200px" />
-                            <a id="login" class="btn btn-common" href="#">
+                            <a id="login" class="btn btn-common" href="/admon/index.html">
                                 <i class="material-icons">login</i>Administrar</a>
                         </div>
                     </div>
@@ -313,7 +423,6 @@ $row = mysqli_fetch_array($result, MYSQLI_ASSOC);
     </div>
 
 
-
     <script data-cfasync="false" src="/assets/js/email-decode.min.js"></script>
     <script src="/assets/js/jquery-min.js"></script>
     <script src="/assets/js/bootstrap.min.js"></script>
@@ -330,6 +439,24 @@ $row = mysqli_fetch_array($result, MYSQLI_ASSOC);
     <script src="/assets/js/wow.js"></script>
     <script src="/assets/js/jquery.slicknav.js"></script>
     <script src="/assets/js/main.js"></script>
+    <script src="/assets/js/scriptCL.js"></script>
+    <script>
+        $(document).ready(function () {
+            $.ajax({
+                url: '/php/noticias/list.php',
+                data: { limit: 10 },
+                success: function (data) {
+                    var json = $.parseJSON(data);
+                    completarNoticias(json);
+                    if (json.total>10){
+                        $("#cargarMas").css("display", "")
+                    }
+                },
+                error: function () {
+                    console.log('There was some error performing the news AJAX call!');
+                }
+            });
+        });
+</script>
 </body>
-
 </html>
