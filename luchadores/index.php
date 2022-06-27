@@ -247,7 +247,7 @@ $row_array["todos"] = $row['conteo'];
                             <h2>Categorías</h2>
                         </div>
                         <div class="social-profiles clearfix  wow animated slideInLeft" data-wow-delay=".2s">
-                        <a class="animated4 btn btn-common" href="/luchadores/index.php">Todas <span id="todas_noticias" class="badge"><? echo $row_array["todos"]?></span></a>
+                        <a class="animated4 btn btn-common" href="/luchadores/index.php">Todas <span id="null_noticias" class="badge"><? echo $row_array["todos"]?></span></a>
                             <a class="animated4 btn btn-common btn-sm" href="/luchadores/index.php?categoria=arte">Arte para el pueblo <span id="arte_noticias" class="badge"><? echo $row_array["arte"]?></span></a>
                             <a class="animated4 btn btn-common btn-sm" href="/luchadores/index.php?categoria=asambleas">Asambleas Populares <span id="asambleas_noticias" class="badge"><? echo $row_array["asambleas"]?></span></a>
                             <a class="animated4 btn btn-common btn-sm" href="/luchadores/index.php?categoria=regiones">Coordinación por regiones <span id="regiones_noticias" class="badge"><? echo $row_array["regiones"]?></span></a>
