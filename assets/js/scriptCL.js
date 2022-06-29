@@ -81,7 +81,7 @@ function completarActualidad(noticia, indice) {
 function cargarInformacionLuchadores(info){
     var html = '<div class="col-md-3 col-sm-6 col-xs-12 no-padding mix '+info["categoria"]+'">'+
     '<figure class="single-portfolio">'+
-        '<img class="img-responsive" style="height: 300px;" src="'+info["url_imagen"]+'" alt="">'+
+        '<img class="img-responsive" style="height: 300px;" onerror="this.src=\'/assets/images/default/luchadores.png\'" src="'+info["url_imagen"]+'" alt="">'+
         '<figcaption class="hover-content">'+
             '<a class="btn btn-round btn-fab btn-xs" href="luchadores/obtener.php?id='+info["luchadores_id"]+'">'+
             '<i class="material-icons">&#xE5C8;</i>'+
