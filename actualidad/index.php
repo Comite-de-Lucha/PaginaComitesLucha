@@ -68,7 +68,7 @@ $row_array["todos"] = $row['conteo'];
             </div>
             <nav role="navigation" id="nav-main" class="okayNav">
                 <ul class="nav navbar-nav">
-                    <li class="active">
+                    <li>
                         <a class="nav-link" href="/" type="button" aria-haspopup="true" aria-expanded="true">Inicio</a>
                     </li>
                     <li class="dropdown sub-menu">
@@ -84,7 +84,7 @@ $row_array["todos"] = $row['conteo'];
                         <a class="nav-link" href="/noticias/index.php" type="button" aria-haspopup="true" aria-expanded="true">Próximos
                             Eventos</a>
                     </li>
-                    <li class="dropdown sub-menu">
+                    <li class="dropdown sub-menu active">
                         <a a class="dropdown-toggle nav-link" href="#" type="button" id="dropdownMenu2"
                             data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">Actualidad</a>
                         <div class="dropdown-menu sub-menu-panel" aria-labelledby="dropdownMenu2">
@@ -109,7 +109,7 @@ $row_array["todos"] = $row['conteo'];
                 </ul>
                 <ul class="wpb-mobile-menu">
                     <li>
-                        <a class="active" href="/">
+                        <a href="/">
                             Inicio
                         </a>
                     </li>
@@ -132,7 +132,7 @@ $row_array["todos"] = $row['conteo'];
                         </a>
                     </li>
                     <li>
-                        <a href="#">
+                        <a class="active" href="#">
                             Actualidad
                         </a>
                         <ul class="dropdown">

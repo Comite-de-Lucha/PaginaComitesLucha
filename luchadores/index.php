@@ -72,7 +72,7 @@ $row_array["todos"] = $row['conteo'];
             </div>
             <nav role="navigation" id="nav-main" class="okayNav">
                 <ul class="nav navbar-nav">
-                    <li class="active">
+                    <li>
                         <a class="nav-link" href="/" type="button" aria-haspopup="true" aria-expanded="true">Inicio</a>
                     </li>
                     <li class="dropdown sub-menu">
@@ -96,7 +96,7 @@ $row_array["todos"] = $row['conteo'];
                             <a class="sub-menu-item" href="/actualidad/index.php?categoria=internacional">Situación actual internacional</a>
                         </div>
                     </li>
-                    <li class="dropdown sub-menu">
+                    <li class="dropdown sub-menu active">
                         <a class=" dropdown-toggle nav-link" href="#" type="button" id="dropdownMenu1"
                             data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">Coordinación de
                             Luchadores</a>
@@ -113,7 +113,7 @@ $row_array["todos"] = $row['conteo'];
                 </ul>
                 <ul class="wpb-mobile-menu">
                     <li>
-                        <a class="active" href="/">
+                        <a  href="/">
                             Inicio
                         </a>
                     </li>
@@ -148,8 +148,8 @@ $row_array["todos"] = $row['conteo'];
                             </li>
                         </ul>
                     </li>
-                    <li>
-                        <a href="#">
+                    <li >
+                        <a class="active" href="#">
                             Coordinación de
                             Luchadores
                         </a>

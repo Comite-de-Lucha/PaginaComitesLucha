@@ -87,7 +87,7 @@ $row_todos["todos"] = $row['conteo'];
             </div>
             <nav role="navigation" id="nav-main" class="okayNav">
                 <ul class="nav navbar-nav">
-                    <li class="active">
+                    <li>
                         <a class="nav-link" href="/" type="button" aria-haspopup="true" aria-expanded="true">Inicio</a>
                     </li>
                     <li class="dropdown sub-menu">
@@ -99,7 +99,7 @@ $row_todos["todos"] = $row['conteo'];
                             <a class="sub-menu-item" href="/info/que_sociedad_queremos.html">¿Qué sociedad queremos?</a>
                         </div>
                     </li>
-                    <li>
+                    <li class="active">
                         <a class="nav-link" href="/noticias/index.php" type="button" aria-haspopup="true" aria-expanded="true">Próximos
                             Eventos</a>
                     </li>
@@ -128,7 +128,7 @@ $row_todos["todos"] = $row['conteo'];
                 </ul>
                 <ul class="wpb-mobile-menu">
                     <li>
-                        <a class="active" href="/">
+                        <a href="/">
                             Inicio
                         </a>
                     </li>
@@ -146,7 +146,7 @@ $row_todos["todos"] = $row['conteo'];
                         </ul>
                     </li>
                     <li>
-                        <a href="/noticias/index.php">
+                        <a class="active" href="/noticias/index.php">
                             Próximos Eventos
                         </a>
                     </li>
