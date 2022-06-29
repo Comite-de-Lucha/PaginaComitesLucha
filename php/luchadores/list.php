@@ -8,7 +8,7 @@ $offset = 0;
 $neoLimit =  $_GET['limit'];
 $neoOffset =  $_GET['offset'];
 $categoria =  $_GET['categoria'];
-if ($neoLimit > 0 && $neoLimit < 5) {
+if ($neoLimit > 0 && $neoLimit < 12) {
     $limit = $neoLimit;
 }
 

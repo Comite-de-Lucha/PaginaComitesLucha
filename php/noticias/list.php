@@ -7,15 +7,21 @@ $limit = 12;
 $offset = 0;
 $neoLimit =  $_GET['limit'];
 $neoOffset =  $_GET['offset'];
-if ($neoLimit > 0 && $neoLimit < 5) {
+$mes =  $_GET['mes'];
+$anho =  $_GET['anho'];
+if ($neoLimit > 0 && $neoLimit < 12) {
     $limit = $neoLimit;
 }
 
 if ($neoOffset > 0) {
     $offset = $neoOffset;
 }
-
+if (empty($mes)){
 $stmt = mysqli_prepare($mysqli, "SELECT * FROM noticias WHERE activo=true ORDER BY fecha DESC LIMIT $offset,$limit");
+}else{
+    $stmt = mysqli_prepare($mysqli,  "SELECT * FROM luchadores WHERE activo=true and YEAR(fecha) = ? and MONTH(fecha) = ? ORDER BY prioridad ASC, fecha DESC LIMIT $offset,$limit");
+    mysqli_stmt_bind_param($stmt, 'ii', $anho, $mes);
+}
 //mysqli_stmt_bind_param($stmt,'variable', $limit);
 
 /* execute query */

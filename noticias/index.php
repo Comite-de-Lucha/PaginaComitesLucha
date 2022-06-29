@@ -1,3 +1,47 @@
+<?php
+//including the database connection file
+include_once("../php/config/configbd.php");
+mysqli_report(MYSQLI_REPORT_ERROR | MYSQLI_REPORT_STRICT);
+
+$stmt = mysqli_prepare($mysqli, "SELECT YEAR(fecha) as anho, MONTH(fecha) as mes, count(*) as conteo FROM noticias WHERE activo=true group by YEAR(fecha), MONTH(fecha) order by YEAR(fecha) desc, MONTH(fecha) asc");
+mysqli_stmt_execute($stmt);
+$result = mysqli_stmt_get_result($stmt);
+$row_mes[1]="Enero";
+$row_mes[2]="Febrero";
+$row_mes[3]="Marzo";
+$row_mes[4]="Abril";
+$row_mes[5]="Mayo";
+$row_mes[6]="Junio";
+$row_mes[7]="Julio";
+$row_mes[8]="Agosto";
+$row_mes[9]="Septiembre";
+$row_mes[10]="Octubre";
+$row_mes[11]="Noviembre";
+$row_mes[12]="Diciembre";
+$row_mes_viz["Enero"]=1;
+$row_mes_viz["Febrero"]=2;
+$row_mes_viz["Marzo"]=3;
+$row_mes_viz["Abril"]=4;
+$row_mes_viz["Mayo"]=5;
+$row_mes_viz["Junio"]=6;
+$row_mes_viz["Julio"]=7;
+$row_mes_viz["Agosto"]=8;
+$row_mes_viz["Septiembre"]=9;
+$row_mes_viz["Octubre"]=10;
+$row_mes_viz["Noviembre"]=11;
+$row_mes_viz["Diciembre"]=12;
+while ($row = mysqli_fetch_array($result, MYSQLI_ASSOC)) {
+        $row_array[$row['anho']][$row_mes[$row['mes']]] = $row['conteo'];
+}
+
+$stmt = mysqli_prepare($mysqli, "SELECT count(*) as conteo FROM noticias WHERE activo=true");
+mysqli_stmt_execute($stmt);
+$result = mysqli_stmt_get_result($stmt);
+$row = $result->fetch_assoc();
+$row_todos["todos"] = $row['conteo'];
+
+?>
+
 <!doctype html>
 <html class="no-js" lang="">
 
@@ -171,7 +215,7 @@
         <div class="container">
             <div class="row">
 
-                <div class="col-md-12 blog-post-column">
+                <div class="col-md-8 blog-post-column">
 
                     <div id="noticias_columna1" class="col-md-6 no-padding">
 
@@ -203,113 +247,37 @@
                     </div>
 
                     <div id="cargarMas" class="col-md-12 text-center mt-30 blog-pagination" style="display:none;">
-                        <a onClick="cargarMasNoticias(this);" offset="10"  href="javascript:void(0)" class="btn btn-common"><i class="material-icons">&#xE028;</i> Cargar más noticias<div class="ripple-container"></div></a>
+                        <a onClick="cargarMasNoticias(this);" offset="12"  href="javascript:void(0)" class="btn btn-common"><i class="material-icons">&#xE028;</i> Cargar más noticias<div class="ripple-container"></div></a>
                     </div>
 
                 </div>
 
-                <div class="col-md-4 blog-sidebar-column" style="display:none;">
+                <div class="col-md-4 blog-sidebar-column">
 
-                    <aside class="col-md-12 single-sidebar-widget author-widget no-padding wow animated fadeInUp" data-wow-delay=".2s">
-                        <div class="author-bg">
-                            <img src="/assets/images/blog/author-bg.jpg" alt="">
-                        </div>
-                        <div class="author-info">
-                            <div class="author-name">
-                                <div class="author-intro">
-                                    <h3>Jhon Doe</h3>
-                                    <p>Front End Developer</p>
-                                </div>
-                                <div class="author-image">
-                                    <img src="/assets/images/blog/author.jpg" class="img-circle" alt="">
-                                </div>
-                            </div>
-                            <div class="author-bio">
-                                <p>While you are planning for a trip then you always search for a best place to visit because that time you have looked for many of places in your mind. Same time, when the thought of Shimla comes in your mind, you stop the
-                                    thoughts about other places because the gorgeousness of natural beauty of Shimla.</p>
-                            </div>
-                        </div>
-                    </aside>
-
-                    <aside class="col-md-12 single-sidebar-widget subscribe-widget no-padding  wow animated fadeInUp" data-wow-delay=".3s">
+                <aside class="col-md-12 single-sidebar-widget subscribe-widget no-padding  wow animated fadeInUp" data-wow-delay=".3s">
                         <div class="sidebar-widget-title">
-                            <h2>Follow & Subscribe</h2>
+                            <h2>Fecha</h2>
                         </div>
-                        <div class="social-profiles clearfix">
-                            <div class="footer-contact-widget">
-                                <ul>
-                                    <li>
-                                        <a href="#"><i class="fa fa-facebook"></i></a>
-                                    </li>
-                                    <li>
-                                        <a href="#"><i class="fa fa-twitter"></i></a>
-                                    </li>
-                                    <li>
-                                        <a href="#"><i class="fa fa-dribbble"></i></a>
-                                    </li>
-                                    <li>
-                                        <a href="#"><i class="fa fa-github"></i></a>
-                                    </li>
-                                    <li>
-                                        <a href="#"><i class="fa fa-linkedin"></i></a>
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
-                        <div class="subscribe-box">
-                            <p>Sign up for new Shelver content, updates,<br>surveys & offers.</p>
-                            <div class="input-group">
-                                <input type="email" class="form-control" placeholder="type your email">
-                                <span class="input-group-btn">
-<button class="btn btn-round btn-fab" type="button"><i class="material-icons">&#xE5C8;</i></button>
-</span>
-                            </div>
-                        </div>
-                    </aside>
-
-                    <aside class="col-md-12 single-sidebar-widget instagram-widget no-padding wow animated fadeInUp" data-wow-delay=".3s">
-                        <div class="sidebar-widget-title">
-                            <h2>Instagram Feed</h2>
-                        </div>
-                        <div class="instagram-feed clearfix">
-                            <ul>
-                                <li>
-                                    <a href="#"><img src="/assets/images/Instagram/insta.jpg" alt=""></a>
-                                </li>
-                                <li>
-                                    <a href="#"><img src="/assets/images/Instagram/insta.jpg" alt=""></a>
-                                </li>
-                                <li>
-                                    <a href="#"><img src="/assets/images/Instagram/insta.jpg" alt=""></a>
-                                </li>
-                                <li>
-                                    <a href="#"><img src="/assets/images/Instagram/insta.jpg" alt=""></a>
-                                </li>
-                                <li>
-                                    <a href="#"><img src="/assets/images/Instagram/insta.jpg" alt=""></a>
-                                </li>
-                                <li>
-                                    <a href="#"><img src="/assets/images/Instagram/insta.jpg" alt=""></a>
-                                </li>
-                            </ul>
-                        </div>
-                    </aside>
-
-                    <aside class="col-md-12 single-sidebar-widget flickr-widget no-padding wow animated fadeInUp" data-wow-delay=".4s">
-                        <div class="sidebar-widget-title">
-                            <h2>Flickr Slider</h2>
-                        </div>
-                        <div class="flickr-feed clearfix">
-                            <div id="flickr-carousel" class="owl-carousel owl-theme">
-                                <div class="item active">
-                                    <img src="/assets/images/Instagram/flickr.jpg" alt="">
+                        <div class="social-profiles clearfix  wow animated slideInLeft" data-wow-delay=".2s">
+                            <a class="animated4 btn btn-common col-md-12" href="/luchadores/index.php">Todas <span id="null_noticias" class="badge"><? echo $row_todos["todos"]?></span></a>
+                            <div class="panel-group mea-default-accordion" id="mea-accordion" role="tablist" aria-multiselectable="true">
+                            <?php
+                            foreach ($row_array as $anho => $row_mes) {
+                                echo '<div class="panel panel-default">
+                                <div class="panel-heading" role="tab" id="heading'.$anho.'">
+                                    <h4 class="panel-title">
+                                        <a role="button" data-toggle="collapse" data-parent="#mea-accordion" href="#collapse'.$anho.'" aria-expanded="true" aria-controls="collapse'.$anho.'">
+                                        '.$anho.'</a>
+                                    </h4>
                                 </div>
-                                <div class="item">
-                                    <img src="/assets/images/Instagram/flickr.jpg" alt="">
-                                </div>
-                                <div class="item">
-                                    <img src="/assets/images/Instagram/flickr.jpg" alt="">
-                                </div>
+                                <div id="collapse'.$anho.'" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="heading'.$anho.'">
+                                <div class="panel-body">';
+                                foreach ($row_mes as $mes => $value) {
+                                echo '<a id="'.$anho.'-'.$row_mes_viz[$mes].'" class="animated4 btn btn-raised btn-default col-md-12" href="/noticias/index.php?anho='.$anho.'&mes='. $row_mes_viz[$mes]. '">'. $mes. ' <span class="badge">'.$value.'</span></a>';
+                                }
+                                echo '</div></div></div>';
+                            }
+                            ?>
                             </div>
                         </div>
                     </aside>
@@ -447,11 +415,11 @@
         $(document).ready(function () {
             $.ajax({
                 url: '/php/noticias/list.php',
-                data: { limit: 10 },
+                data: { limit: 12, mes: findGetParameter("mes"), anho: findGetParameter("anho") },
                 success: function (data) {
                     var json = $.parseJSON(data);
                     completarNoticias(json);
-                    if (json.total>10){
+                    if (json.total>12){
                         $("#cargarMas").css("display", "")
                     }
                 },
