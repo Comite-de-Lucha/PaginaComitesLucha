@@ -209,7 +209,7 @@ $row_array["todos"] = $row['conteo'];
 
                                 <div class="featured-image">
                                     <a class="url_noticia" href="#">
-                                        <img class="imagen_noticia" src="/assets/images/blog/featured1.png" alt="">
+                                        <img class="imagen_noticia" onerror="this.src='/assets/images/default/luchadores.png'" src="/assets/images/default/luchadores.png" alt="">
                                     </a>
                                 </div>
 
