@@ -111,7 +111,7 @@ function completarNoticias($json){
             }
             var noticia=$("#ejemplo_noticia").clone();
             noticia.find(".url_noticia").attr("href", "/noticias/obtener.php?id=" + this.noticia_id );
-            noticia.find(".imagen_noticia").attr("src", this.url_imagen);
+            noticia.find(".imagen_noticia").attr("src", ""+this.url_imagen);
             noticia.find(".titulo_noticia").html(this.titulo);
             noticia.find(".subtitulo_noticia").html(this.subtitulo);
             noticia.addClass("wow animated fadeInUp");
