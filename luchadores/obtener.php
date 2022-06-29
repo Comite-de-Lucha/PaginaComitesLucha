@@ -85,8 +85,8 @@ $row = mysqli_fetch_array($result, MYSQLI_ASSOC);
                         <a a class="dropdown-toggle nav-link" href="#" type="button" id="dropdownMenu2"
                         data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">Actualidad</a>
                         <div class="dropdown-menu sub-menu-panel" aria-labelledby="dropdownMenu2">
-                            <a class="sub-menu-item" href="#">Situación actual nacional</a>
-                            <a class="sub-menu-item" href="#">Situación actual internacional</a>
+                            <a class="sub-menu-item" href="/actualidad/index.php?categoria=nacional">Situación actual nacional</a>
+                            <a class="sub-menu-item" href="/actualidad/index.php?categoria=internacional">Situación actual internacional</a>
                         </div>
                     </li>
                     <li class="dropdown sub-menu">
@@ -133,10 +133,10 @@ $row = mysqli_fetch_array($result, MYSQLI_ASSOC);
                         </a>
                         <ul class="dropdown">
                             <li>
-                                <a href="#">Situación actual nacional</a>
+                                <a href="/actualidad/index.php?categoria=nacional">Situación actual nacional</a>
                             </li>
                             <li>
-                                <a href="#">Situación actual internacional</a>
+                                <a href="/actualidad/index.php?categoria=internacional">Situación actual internacional</a>
                             </li>
                         </ul>
                     </li>

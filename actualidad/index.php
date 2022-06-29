@@ -3,37 +3,39 @@
 include_once("../php/config/configbd.php");
 mysqli_report(MYSQLI_REPORT_ERROR | MYSQLI_REPORT_STRICT);
 
-$stmt = mysqli_prepare($mysqli, "SELECT * FROM actualidad WHERE actualidad_id = ?");
-mysqli_stmt_bind_param($stmt, 'i', $_GET['id']);
-
-/* execute query */
+$stmt = mysqli_prepare($mysqli, "SELECT categoria, count(*) as conteo FROM actualidad WHERE activo=true group by categoria");
 mysqli_stmt_execute($stmt);
-
 $result = mysqli_stmt_get_result($stmt);
+$row_array["nacional"] =0;
+$row_array["internacional"] =0;
+while ($row = mysqli_fetch_array($result, MYSQLI_ASSOC)) {
+    $categorias = explode(" ",$row['categoria']);
+    foreach ($categorias as $categoria) {
+        $row_array[$categoria] = $row_array[$categoria]+ $row['conteo'];
+    }
+    
+}
 
-$row = mysqli_fetch_array($result, MYSQLI_ASSOC);
+$stmt = mysqli_prepare($mysqli, "SELECT count(*) as conteo FROM actualidad WHERE activo=true");
+mysqli_stmt_execute($stmt);
+$result = mysqli_stmt_get_result($stmt);
+$row = $result->fetch_assoc();
+$row_array["todos"] = $row['conteo'];
+
 ?>
-<html class="desktop mbr-site-loaded">
+<!doctype html>
+<html class="no-js" lang="">
 
 <head>
-<title>Coordinación de Luchadores</title>
 
-<meta charset="utf-8">
-<meta http-equiv="x-ua-compatible" content="ie=edge">
-<meta name="description" content="Páginas de los Comités de Lucha de Colombia">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
-<link rel="apple-touch-icon" href="apple-touch-icon.png">
+    <title>Coordinación de luchadores - Comités de Lucha</title>
 
-
-    <!--  Essential META Tags -->
-    <meta property="og:title" content="Comités de Lucha. <? echo $row["titulo"]?>" />
-    <meta property="og:image" itemprop="image"
-        content="<? echo $row["url_imagen"]?>" />
-    <meta property="og:type" content="website" />
-    <meta property="og:video:type" content="text/html">
-    
-    <meta name="twitter:card" content="summary_large_image" />
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta name="description" content="Páginas de los Comités de Lucha de Colombia">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
+    <link rel="apple-touch-icon" href="apple-touch-icon.png">
 
     <link rel="stylesheet" href="/assets/css/bootstrap.min.css">
     <link rel="stylesheet" href="/assets/css/material.min.css">
@@ -53,13 +55,14 @@ $row = mysqli_fetch_array($result, MYSQLI_ASSOC);
     <link rel="stylesheet" href="/assets/css/estilosCL.css">
 </head>
 
-<body class="clickup-chrome-ext_installed" cz-shortcut-listen="true">
-    
-<header id="header" class="navbar navbar-default affix-top" data-spy="affix" data-offset-top="400">
+<body>
+
+    <header id="header" class="navbar navbar-default affix-top" data-spy="affix" data-offset-top="400">
         <div class="container">
             <div class="navbar-header">
                 <a class="navbar-brand site-logo vertical-align" href="/">
-                    <img class="img-responsive img-circle pull-left mt-20" src="/assets/images/icono.png" width="80px" />
+                    <img class="img-responsive img-circle pull-left mt-20" src="/assets/images/icono.png"
+                        width="80px" />
                     <h2 class="pull-left">Comités de Lucha</h2>
                 </a>
             </div>
@@ -77,13 +80,13 @@ $row = mysqli_fetch_array($result, MYSQLI_ASSOC);
                             <a class="sub-menu-item" href="/info/que_sociedad_queremos.html">¿Qué sociedad queremos?</a>
                         </div>
                     </li>
-                     <li>
+                    <li>
                         <a class="nav-link" href="/noticias/index.php" type="button" aria-haspopup="true" aria-expanded="true">Próximos
                             Eventos</a>
                     </li>
                     <li class="dropdown sub-menu">
                         <a a class="dropdown-toggle nav-link" href="#" type="button" id="dropdownMenu2"
-                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">Actualidad</a>
+                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">Actualidad</a>
                         <div class="dropdown-menu sub-menu-panel" aria-labelledby="dropdownMenu2">
                             <a class="sub-menu-item" href="/actualidad/index.php?categoria=nacional">Situación actual nacional</a>
                             <a class="sub-menu-item" href="/actualidad/index.php?categoria=internacional">Situación actual internacional</a>
@@ -96,10 +99,11 @@ $row = mysqli_fetch_array($result, MYSQLI_ASSOC);
                         <div class="dropdown-menu sub-menu-panel" aria-labelledby="dropdownMenu1">
                             <a class="sub-menu-item" href="/luchadores/index.php?categoria=arte">Arte para el pueblo</a>
                             <a class="sub-menu-item" href="/luchadores/index.php?categoria=asambleas">Asambleas Populares</a>
-                             <a class="sub-menu-item" href="/luchadores/index.php?categoria=regiones">Coordinación por regiones</a>
-<a class="sub-menu-item" href="#">Primera Línea</a>
+                            <a class="sub-menu-item" href="/luchadores/index.php?categoria=regiones">Coordinación por regiones</a>
+                            <a class="sub-menu-item" href="/luchadores/index.php?categoria=primera_linea">Primera Línea</a>
                             <a class="sub-menu-item" href="/luchadores/index.php?categoria=mujeres">Mujeres</a>
-                            <a class="sub-menu-item" href="/luchadores/index.php?categoria=etnias">Campesinos, Indígenas y etnias</a>                        </div>
+                            <a class="sub-menu-item" href="/luchadores/index.php?categoria=etnias">Campesinos, Indígenas y etnias</a>
+                        </div>
                     </li>
 
                 </ul>
@@ -122,7 +126,7 @@ $row = mysqli_fetch_array($result, MYSQLI_ASSOC);
                             </li>
                         </ul>
                     </li>
-                     <li>
+                    <li>
                         <a href="/noticias/index.php">
                             Próximos Eventos
                         </a>
@@ -179,9 +183,7 @@ $row = mysqli_fetch_array($result, MYSQLI_ASSOC);
                 <div class="col-md-12">
                     <div class="title-center">
                         <div class="title-middle">
-                            <h2 class="page-tagline">Situación actual <? echo $row["categoria"]?></h2>
-                            <h1 class="page-title"><? echo $row["titulo"]?></h1>
-                            <h5 class="page-tagline">Por <? echo $row["autor"]?></h5>
+                            <h1 class="page-title">Situación actual</h1>
                         </div>
                     </div>
                 </div>
@@ -189,20 +191,70 @@ $row = mysqli_fetch_array($result, MYSQLI_ASSOC);
         </div>
     </section>
 
+
     <section class="mea-blog-post-page section-padding">
         <div class="container">
             <div class="row">
 
-                <div class="single-blog-page col-md-12">
-                    <article class="single-post wow fadeInUp animated" data-wow-delay=".2s">
-                    <? echo $row["descripcion"]?>
-                    </article>
+                <div class="col-md-8 blog-post-column">
+
+                    <div id="noticias_columna1" class="col-md-4 no-padding">
+
+                        <div id="ejemplo_noticia" class="col-md-12" data-wow-delay=".2s" style="display:none">
+                            <article class="single-blog-post">
+
+                                <div class="featured-image">
+                                    <a class="url_noticia" href="#">
+                                        <img class="imagen_noticia" onerror="this.src='/assets/images/default/noticias.jpeg'" src="/assets/images/default/noticias.jpeg" alt="" style="height:300px;">
+                                    </a>
+                                </div>
+
+                                <div class="post-meta">
+
+                                    <div class="read-more-icon">
+                                        <a class="btn btn-round btn-fab url_noticia" href="blog-single.html"><i class="material-icons">&#xE5C8;</i><div class="ripple-container"></div></a>
+                                    </div>
+
+                                    <a href="blog-single.html">
+                                        <h2 class="subtitle titulo_noticia">Lorem ipsum do lor sit amet, cosectetur adipisicing</h2>
+                                    </a>
+                                    <p>Por <b class="subtitulo_noticia"></b></p>
+                                </div>
+                            </article>
+                        </div>
+                    </div>
+
+                    <div  id="noticias_columna2" class="col-md-4 no-padding">
+                    </div>
+
+                    <div  id="noticias_columna3" class="col-md-4 no-padding">
+                    </div>
+
+                    <div id="cargarMas" class="col-md-12 text-center mt-30 blog-pagination" style="display:none;">
+                        <a onClick="cargarMasNoticias(this);" offset="12"  href="javascript:void(0)" class="btn btn-common"><i class="material-icons">&#xE028;</i> Cargar más noticias<div class="ripple-container"></div></a>
+                    </div>
+
+                </div>
+
+                <div class="col-md-4 blog-sidebar-column">
+
+                    <aside class="col-md-12 single-sidebar-widget subscribe-widget no-padding  wow animated fadeInUp" data-wow-delay=".3s">
+                        <div class="sidebar-widget-title">
+                            <h2>Categorías</h2>
+                        </div>
+                        <div class="social-profiles clearfix  wow animated slideInLeft" data-wow-delay=".2s">
+                        <a class="animated4 btn btn-common col-md-12 col-sm-12" href="/actualidad/index.php">Todas <span id="null_noticias" class="badge"><? echo $row_array["todos"]?></span></a>
+                            <a class="animated4 btn btn-common btn-sm col-md-12 col-sm-12" href="/actualidad/index.php?categoria=nacional">Nacional<span id="nacional_noticias"  class="badge"><? echo $row_array["nacional"]?></span></a>
+                            <a class="animated4 btn btn-common btn-sm col-md-12 col-sm-12" href="/actualidad/index.php?categoria=internacional">Internacional <span id="internacional_noticias"  class="badge"><? echo $row_array["internacional"]?></span></a>
+                            </div>
+                    </aside>
                 </div>
             </div>
         </div>
     </section>
 
-<footer class="mea-footer-section">
+
+    <footer class="mea-footer-section">
 
         <div class="footer-widget-container">
             <div class="container">
@@ -211,7 +263,7 @@ $row = mysqli_fetch_array($result, MYSQLI_ASSOC);
                     <div class="col-md-3 single-footer-widget wow animated fadeInUp mx-auto" data-wow-delay=".2s">
                         <div class="text-center">
                             <img src="/assets/images/icono.png" width="200px" />
-                            <a id="login" class="btn btn-common" href="#">
+                            <a id="login" class="btn btn-common" href="/admon/index.html">
                                 <i class="material-icons">login</i>Administrar</a>
                         </div>
                     </div>
@@ -309,7 +361,6 @@ $row = mysqli_fetch_array($result, MYSQLI_ASSOC);
     </div>
 
 
-
     <script data-cfasync="false" src="/assets/js/email-decode.min.js"></script>
     <script src="/assets/js/jquery-min.js"></script>
     <script src="/assets/js/bootstrap.min.js"></script>
@@ -326,6 +377,25 @@ $row = mysqli_fetch_array($result, MYSQLI_ASSOC);
     <script src="/assets/js/wow.js"></script>
     <script src="/assets/js/jquery.slicknav.js"></script>
     <script src="/assets/js/main.js"></script>
+    <script src="/assets/js/scriptCL.js"></script>
+    <script>
+        $(document).ready(function () {
+            categoriaSeleccionada(findGetParameter("categoria") );
+            $.ajax({
+                url: '/php/actualidad/list.php',
+                data: { limit: 12, categoria: findGetParameter("categoria") },
+                success: function (data) {
+                    var json = $.parseJSON(data);
+                    completarActualidades(json);
+                    if (json.total>12){
+                        $("#cargarMas").css("display", "")
+                    }
+                },
+                error: function () {
+                    console.log('There was some error performing the news AJAX call!');
+                }
+            });
+        });
+</script>
 </body>
-
 </html>

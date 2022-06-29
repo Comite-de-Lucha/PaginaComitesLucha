@@ -161,14 +161,42 @@ function completarLuchadores($json){
                 idDiv=idDiv+"3";
             }
             var noticia=$("#ejemplo_noticia").clone();
-            noticia.find(".url_noticia").attr("href", "/luchadores/obtener.php?id=" + this.noticia_id );
+            noticia.find(".url_noticia").attr("href", "/luchadores/obtener.php?id=" + this.luchadores_id );
             noticia.find(".imagen_noticia").attr("src", this.url_imagen);
             noticia.find(".titulo_noticia").html(this.titulo);
             noticia.find(".subtitulo_noticia").html(this.subtitulo);
             noticia.addClass("wow animated fadeInUp");
             noticia.attr("data-wow-delay", "."+tiempos+"s");
             noticia.css("display", "");
-            noticia.attr("id", "noticia"+this.noticia_id)
+            noticia.attr("id", "noticia"+this.luchadores_id)
+            $(idDiv).append(noticia);
+            indice = indice+1;
+            tiempos = tiempos+1;
+            $("#ejemplo_noticia").css("display", "none");
+        });
+}
+function completarActualidades($json){
+    var indice=0
+    var tiempos=1;
+    $($json.resultados).each(
+        function() {
+            var idDiv="#noticias_columna";
+            if (indice%3===0){
+                idDiv=idDiv+"1";
+            }else if (indice%3===1){
+                idDiv=idDiv+"2";
+            }else{
+                idDiv=idDiv+"3";
+            }
+            var noticia=$("#ejemplo_noticia").clone();
+            noticia.find(".url_noticia").attr("href", "/actualidad/obtener.php?id=" + this.actualidad_id );
+            noticia.find(".imagen_noticia").attr("src", ""+this.url_imagen);
+            noticia.find(".titulo_noticia").html(this.titulo);
+            noticia.find(".subtitulo_noticia").html(this.autor);
+            noticia.addClass("wow animated fadeInUp");
+            noticia.attr("data-wow-delay", "."+tiempos+"s");
+            noticia.css("display", "");
+            noticia.attr("id", "noticia"+this.actualidad_id)
             $(idDiv).append(noticia);
             indice = indice+1;
             tiempos = tiempos+1;

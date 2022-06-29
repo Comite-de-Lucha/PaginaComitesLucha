@@ -7,15 +7,21 @@ $limit = 12;
 $offset = 0;
 $neoLimit =  $_GET['limit'];
 $neoOffset =  $_GET['offset'];
-if ($neoLimit > 0 && $neoLimit < 5) {
+$categoria =  $_GET['categoria'];
+if ($neoLimit > 0 && $neoLimit < 12) {
     $limit = $neoLimit;
 }
 
 if ($neoOffset > 0) {
     $offset = $neoOffset;
 }
-
-$stmt = mysqli_prepare($mysqli, "SELECT * FROM actualidad WHERE activo=true ORDER BY fecha DESC LIMIT $offset,$limit");
+if (empty($categoria)){
+    $stmt = mysqli_prepare($mysqli, "SELECT * FROM actualidad WHERE activo=true ORDER BY fecha DESC LIMIT $offset,$limit");
+}
+else{
+    $stmt = mysqli_prepare($mysqli,  "SELECT * FROM actualidad WHERE activo=true and categoria = ? ORDER BY fecha DESC LIMIT $offset,$limit");
+    mysqli_stmt_bind_param($stmt, 's', $categoria);
+}
 //mysqli_stmt_bind_param($stmt,'variable', $limit);
 
 /* execute query */
@@ -37,7 +43,12 @@ while ($row = mysqli_fetch_array($result, MYSQLI_ASSOC)) {
     array_push($return_arr, $row_array);
 }
 
-$stmt = mysqli_prepare($mysqli, "SELECT count(*) as conteo FROM actualidad WHERE activo=true");
+if (empty($categoria)){
+    $stmt = mysqli_prepare($mysqli, "SELECT count(*) as conteo FROM actualidad WHERE activo=true");
+}else{
+    $stmt = mysqli_prepare($mysqli, "SELECT count(*) as conteo FROM actualidad WHERE activo=true and categoria=?");
+    mysqli_stmt_bind_param($stmt, 's', $categoria);
+}
 mysqli_stmt_execute($stmt);
 $result = mysqli_stmt_get_result($stmt);
 $row = $result->fetch_assoc();
