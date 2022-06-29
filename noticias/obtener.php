@@ -51,7 +51,7 @@ $row = mysqli_fetch_array($result, MYSQLI_ASSOC);
     <link rel="stylesheet" href="/assets/css/font-awesome.min.css">
 
     <link rel="stylesheet" href="/assets/css/estilosCL.css">
-    <style>
+    <style>      
         .page-title-section {
             position: relative;
             background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),  url(<? echo $row["url_imagen"]?>) no-repeat scroll center center;
@@ -215,10 +215,10 @@ $row = mysqli_fetch_array($result, MYSQLI_ASSOC);
             <div class="container">
                 <div class="row">
 
-                    <div class="col-md-3 single-footer-widget wow animated fadeInUp mx-auto" data-wow-delay=".2s">
+                <div class="col-md-3 single-footer-widget wow animated fadeInUp mx-auto" data-wow-delay=".2s">
                         <div class="text-center">
                             <img src="/assets/images/icono.png" width="200px" />
-                            <a id="login" class="btn btn-common" href="#">
+                            <a id="login" class="btn btn-common" href="/admon/index.html">
                                 <i class="material-icons">login</i>Administrar</a>
                         </div>
                     </div>
