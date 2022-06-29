@@ -259,7 +259,7 @@ $row_todos["todos"] = $row['conteo'];
                             <h2>Fecha</h2>
                         </div>
                         <div class="social-profiles clearfix  wow animated slideInLeft" data-wow-delay=".2s">
-                            <a class="animated4 btn btn-common col-md-12" href="/luchadores/index.php">Todas <span id="null_noticias" class="badge"><? echo $row_todos["todos"]?></span></a>
+                            <a class="animated4 btn btn-common col-md-12 col-sm-12" href="/luchadores/index.php">Todas <span id="null_noticias" class="badge"><? echo $row_todos["todos"]?></span></a>
                             <div class="panel-group mea-default-accordion" id="mea-accordion" role="tablist" aria-multiselectable="true">
                             <?php
                             foreach ($row_array as $anho => $row_mes) {
@@ -273,7 +273,7 @@ $row_todos["todos"] = $row['conteo'];
                                 <div id="collapse'.$anho.'" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="heading'.$anho.'">
                                 <div class="panel-body">';
                                 foreach ($row_mes as $mes => $value) {
-                                echo '<a id="'.$anho.'-'.$row_mes_viz[$mes].'" class="animated4 btn btn-raised btn-default col-md-12" href="/noticias/index.php?anho='.$anho.'&mes='. $row_mes_viz[$mes]. '">'. $mes. ' <span class="badge">'.$value.'</span></a>';
+                                echo '<a id="'.$anho.'-'.$row_mes_viz[$mes].'" class="animated4 btn btn-raised btn-default col-md-12 col-sm-12" href="/noticias/index.php?anho='.$anho.'&mes='. $row_mes_viz[$mes]. '">'. $mes. ' <span class="badge">'.$value.'</span></a>';
                                 }
                                 echo '</div></div></div>';
                             }
