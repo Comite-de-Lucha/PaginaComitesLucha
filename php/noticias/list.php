@@ -19,7 +19,7 @@ if ($neoOffset > 0) {
 if (empty($mes)){
 $stmt = mysqli_prepare($mysqli, "SELECT * FROM noticias WHERE activo=true ORDER BY fecha DESC LIMIT $offset,$limit");
 }else{
-    $stmt = mysqli_prepare($mysqli,  "SELECT * FROM luchadores WHERE activo=true and YEAR(fecha) = ? and MONTH(fecha) = ? ORDER BY prioridad ASC, fecha DESC LIMIT $offset,$limit");
+    $stmt = mysqli_prepare($mysqli,  "SELECT * FROM noticias WHERE activo=true and YEAR(fecha) = ? and MONTH(fecha) = ? ORDER BY fecha DESC LIMIT $offset,$limit");
     mysqli_stmt_bind_param($stmt, 'ii', $anho, $mes);
 }
 //mysqli_stmt_bind_param($stmt,'variable', $limit);
@@ -43,7 +43,12 @@ while ($row = mysqli_fetch_array($result, MYSQLI_ASSOC)) {
     array_push($return_arr, $row_array);
 }
 
+if (empty($mes)){
 $stmt = mysqli_prepare($mysqli, "SELECT count(*) as conteo FROM noticias WHERE activo=true");
+}else{
+    $stmt = mysqli_prepare($mysqli, "SELECT count(*) as conteo FROM noticias WHERE activo=true and YEAR(fecha) = ? and MONTH(fecha) = ?");
+    mysqli_stmt_bind_param($stmt, 'ii', $anho, $mes);
+}
 mysqli_stmt_execute($stmt);
 $result = mysqli_stmt_get_result($stmt);
 $row = $result->fetch_assoc();

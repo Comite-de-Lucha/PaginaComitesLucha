@@ -180,3 +180,7 @@ function categoriaSeleccionada(categoria){
     $("#"+categoria+"_noticias").closest(".btn").removeClass("animated4 btn-common");
     $("#"+categoria+"_noticias").closest(".btn").addClass("btn-raised btn-primary");
 }
+function MesAnhoSeleccionado(mesanho){
+    $("#"+mesanho).removeClass("btn-default");
+    $("#"+mesanho).addClass("btn-primary");
+}

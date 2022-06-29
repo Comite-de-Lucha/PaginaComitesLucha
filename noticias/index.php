@@ -413,6 +413,7 @@ $row_todos["todos"] = $row['conteo'];
     <script src="/assets/js/scriptCL.js"></script>
     <script>
         $(document).ready(function () {
+            MesAnhoSeleccionado(findGetParameter("anho")+"-"+findGetParameter("mes"));
             $.ajax({
                 url: '/php/noticias/list.php',
                 data: { limit: 12, mes: findGetParameter("mes"), anho: findGetParameter("anho") },
