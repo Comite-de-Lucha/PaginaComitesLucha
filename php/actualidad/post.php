@@ -13,6 +13,10 @@ $categoria =  $_POST['categoria_noticia'];
 $descripcion =  $_POST['descripcion_noticia'];
 $id =  $_POST['id'];
 
+if (empty($fecha)){
+    $fecha=date('Y-m-d H:i:s');
+}
+
 if (0 < $_FILES['imagen_noticia']['error']) {
     echo 'Error: ' . $_FILES['imagen_noticia']['error'] . '<br>';
 } else {

@@ -11,6 +11,10 @@ $categoria =  $_POST['categoria_publicacion'];
 $codigo =  $_POST['codigo_publicacion'];
 $id =  $_POST['id'];
 
+if (empty($fecha)){
+    $fecha=date('Y-m-d H:i:s');
+}
+
 if (empty($id)) {
     $stmt = mysqli_prepare($mysqli, "INSERT INTO publicaciones ( categoria, fecha,  codigo) VALUES (?, ?, ?)");
     mysqli_stmt_bind_param($stmt, "sss",  $categoria, $fecha, $codigo);

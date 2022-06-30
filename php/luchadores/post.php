@@ -14,6 +14,10 @@ $fecha =  $_POST['fecha_info'];
 $descripcion =  $_POST['descripcion_info'];
 $id =  $_POST['id'];
 
+if (empty($fecha)){
+    $fecha=date('Y-m-d H:i:s');
+}
+
 if (0 < $_FILES['imagen_info']['error']) {
     echo 'Error: ' . $_FILES['imagen_info']['error'] . '<br>';
 } else {
