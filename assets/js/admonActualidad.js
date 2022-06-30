@@ -61,6 +61,7 @@ function agregarNuevaNoticia() {
     json.boton = 'Encuentra más Información';
     json.url_imagen = '';
     completarNoticia(json, 0);
+    document.getElementById('editar').scrollIntoView(true);
 }
 
 function cambiarValorImagen($this) {

@@ -63,6 +63,7 @@ function agregarNuevaInformacion() {
     json.subtitulo = "Subtítulo";
     json.url_imagen = '';
     completarLuchadores(json, 0);
+    document.getElementById('editar').scrollIntoView(true);
 }
 
 function cambiarValorImagen($this) {

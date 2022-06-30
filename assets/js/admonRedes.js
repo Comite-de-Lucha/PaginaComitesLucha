@@ -34,6 +34,7 @@ function agregarNuevapublicacion() {
     $("#fecha_publicacion").val("");
     $("option:selected").removeAttr("selected");
     $("#problema_creando_publicacion").css("display", "none");
+    document.getElementById('editar').scrollIntoView(true);
 
 }
 
