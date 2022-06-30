@@ -25,4 +25,4 @@ if (empty($id)) {
     /* execute query */
     mysqli_stmt_execute($stmt);
 
-    echo 'ok';
+    echo json_encode(['resultado' => 'ok', 'publicacion' => $path_host]);

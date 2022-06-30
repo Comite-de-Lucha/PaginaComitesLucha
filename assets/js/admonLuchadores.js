@@ -102,10 +102,10 @@ function guardarinformacion() {
         contentType: false,
         processData: false,
         success: function(data) {
-            console.log(data);
-            if (data === "ok") {
-                $("#enlace_luchadores")[0].click();
-            } else if (data.includes("location")) {
+            var json = $.parseJSON(data);
+            if (json.resultado === "ok") {
+                window.location.href = json.publicacion;
+            } else if (json.includes("location")) {  
                 var json = $.parseJSON(data);
                 if (json.location) {
                     window.location.href = json.location;

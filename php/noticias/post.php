@@ -51,5 +51,10 @@ if (0 < $_FILES['imagen_noticia']['error']) {
     /* execute query */
     mysqli_stmt_execute($stmt);
 
-    echo 'ok';
+    $ultimoInsertar=mysqli_stmt_insert_id($stmt);
+    if  (!empty($id)){
+        $ultimoInsertar = $id;
+    }
+    
+    echo json_encode(['resultado' => 'ok', 'publicacion' => $path_obtener_noticias.'?id='.$ultimoInsertar]);
 }
