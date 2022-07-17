@@ -161,3 +161,23 @@ function eliminar(id) {
     });
 
 }
+
+function cambiarInstrucciones($this){
+    $("#instrucciones_fb").css("display", "none");
+    $("#instrucciones_tw").css("display", "none");
+    $("#instrucciones_yt").css("display", "none");
+    $("#instrucciones_tt").css("display", "none");
+    if ($($this).val()==="facebook"){
+        $("#instrucciones_fb").css("display", "");
+    }
+   else if ($($this).val()==="twitter"){
+        $("#instrucciones_tw").css("display", "");
+    }
+   else if ($($this).val()==="youtube"){
+        $("#instrucciones_yt").css("display", "");
+    }
+    else if ($($this).val()==="tiktok"){
+        $("#instrucciones_tt").css("display", "");
+    }
+
+}
