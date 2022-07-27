@@ -27,9 +27,9 @@ $row = mysqli_fetch_array($result, MYSQLI_ASSOC);
 
 
     <!--  Essential META Tags -->
-    <meta property="og:title" content="Comités de Lucha. <? echo $row["titulo"]?>" />
+    <meta property="og:title" content="Comités de Lucha. <?php echo $row["titulo"]?>" />
     <meta property="og:image" itemprop="image"
-        content="<? echo $row["url_imagen"]?>" />
+        content="<?php echo $row["url_imagen"]?>" />
     <meta property="og:type" content="website" />
     <meta property="og:video:type" content="text/html">
     
@@ -180,8 +180,8 @@ $row = mysqli_fetch_array($result, MYSQLI_ASSOC);
                     <div class="title-center">
                         <div class="title-middle">
                             <h2 class="page-tagline">Coordinación de Luchadores</h2>
-                            <h1 class="page-title"><? echo $row["titulo"]?></h1>
-                            <h5 class="page-title"><? echo $row["subtitulo"]?></h5>
+                            <h1 class="page-title"><?php echo $row["titulo"]?></h1>
+                            <h5 class="page-title"><?php echo $row["subtitulo"]?></h5>
                         </div>
                     </div>
                 </div>
@@ -195,8 +195,14 @@ $row = mysqli_fetch_array($result, MYSQLI_ASSOC);
 
                 <div class="single-blog-page col-md-12">
                     <article class="single-post wow fadeInUp animated" data-wow-delay=".2s">
-                    <? echo $row["descripcion"]?>
+                    <?php echo $row["descripcion"]?>
                     </article>
+                    <?php if (!empty($row["publicacion"])){
+                        echo '<article class="single-post wow fadeInUp animated text-center" data-wow-delay=".3s">';
+                        echo $row["publicacion"];
+                        echo "</article>";
+                    }
+                    ?>
                 </div>
             </div>
         </div>

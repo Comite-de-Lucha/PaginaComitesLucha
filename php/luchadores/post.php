@@ -12,23 +12,24 @@ $titulo =  $_POST['titulo_info'];
 $subtitulo =  $_POST['subtitulo_info'];
 $fecha =  $_POST['fecha_info'];
 $descripcion =  $_POST['descripcion_info'];
+$publicacion =  $_POST['publicacion_info'];
 $id =  $_POST['id'];
 
 if (empty($fecha)){
     $fecha=date('Y-m-d H:i:s');
 }
 
-if (0 < $_FILES['imagen_info']['error']) {
+if (isset($_FILES['imagen_info']) && 0 < $_FILES['imagen_info']['error']) {
     echo 'Error: ' . $_FILES['imagen_info']['error'] . '<br>';
 } else {
-    if (empty($_FILES['imagen_info']['name'])) {
+    if (!isset($_FILES['imagen_info'])) {
         //Subir datos
         if (empty($id)) {
-            $stmt = mysqli_prepare($mysqli, "INSERT INTO luchadores (titulo, subtitulo, categoria, prioridad, fecha,  descripcion) VALUES (?, ?, ?, ?, ?, ?)");
-            mysqli_stmt_bind_param($stmt, "sssiss", $titulo, $subtitulo, $categoria, $prioridad, $fecha, $descripcion);
+            $stmt = mysqli_prepare($mysqli, "INSERT INTO luchadores (titulo, subtitulo, categoria, prioridad, fecha,  descripcion, publicacion) VALUES (?, ?, ?, ?, ?, ?)");
+            mysqli_stmt_bind_param($stmt, "sssisss", $titulo, $subtitulo, $categoria, $prioridad, $fecha, $descripcion, $publicacion);
         } else {
-            $stmt = mysqli_prepare($mysqli, "UPDATE luchadores SET titulo=? , subtitulo=?, categoria=?, prioridad=?, fecha= ?, descripcion = ? WHERE luchadores_id = ?");
-            mysqli_stmt_bind_param($stmt, "sssissi", $titulo, $subtitulo,  $categoria, $prioridad, $fecha, $descripcion, $id);
+            $stmt = mysqli_prepare($mysqli, "UPDATE luchadores SET titulo=? , subtitulo=?, categoria=?, prioridad=?, fecha= ?, descripcion = ?, publicacion = ? WHERE luchadores_id = ?");
+            mysqli_stmt_bind_param($stmt, "sssisssi", $titulo, $subtitulo,  $categoria, $prioridad, $fecha, $descripcion, $publicacion, $id);
         }
     } else {
         //Subir archivo
@@ -42,11 +43,11 @@ if (0 < $_FILES['imagen_info']['error']) {
 
         //Subir datos
         if (empty($id)) {
-            $stmt = mysqli_prepare($mysqli, "INSERT INTO luchadores (titulo, subtitulo, categoria, prioridad, fecha,  descripcion, url_imagen) VALUES (?, ?, ?, ?, ?, ?, ?)");
-            mysqli_stmt_bind_param($stmt, "sssisss",$titulo, $subtitulo, $categoria, $prioridad, $fecha, $descripcion, $location);
+            $stmt = mysqli_prepare($mysqli, "INSERT INTO luchadores (titulo, subtitulo, categoria, prioridad, fecha,  descripcion, publicacion, url_imagen) VALUES (?, ?, ?, ?, ?, ?, ?, ?)");
+            mysqli_stmt_bind_param($stmt, "sssisss",$titulo, $subtitulo, $categoria, $prioridad, $fecha, $descripcion, $publicacion, $location);
         } else {
-            $stmt = mysqli_prepare($mysqli, "UPDATE luchadores SET  titulo=? , subtitulo=?, categoria=?, prioridad=?, fecha= ?, descripcion = ?, url_imagen = ? WHERE luchadores_id = ?");
-            mysqli_stmt_bind_param($stmt, "sssisssi",$titulo, $subtitulo, $categoria, $prioridad, $fecha, $descripcion, $location, $id);
+            $stmt = mysqli_prepare($mysqli, "UPDATE luchadores SET  titulo=? , subtitulo=?, categoria=?, prioridad=?, fecha= ?, descripcion = ?, url_imagen = ?, publicacion = ? WHERE luchadores_id = ?");
+            mysqli_stmt_bind_param($stmt, "sssissssi",$titulo, $subtitulo, $categoria, $prioridad, $fecha, $descripcion, $location, $publicacion, $id);
         }
     }
     /* execute query */

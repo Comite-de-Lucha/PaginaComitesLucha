@@ -144,6 +144,71 @@
                     <label>Información completa</label>
                     <textarea id="descripcion_info" name="editordata"></textarea>
                   </div>
+                  <div class="form-group">
+                    <label>Red social</label>
+                  <select id="publicacion_categoria" class="form-control" onchange="cambiarInstrucciones(this);">
+                    <option value="facebook">Facebook</option>
+                    <option value="tiktok">TikTok</option>
+                    <option value="twitter">Twitter</option>
+                  </select>
+                  </div>
+              <div id="instrucciones_fb" class="row">
+                <div class="col-md-12 col-sm-12 col-xs-12">
+                <label>Pasos para obtener el código de la publicación en Facebook. Sólo funciona con publicaciones públicas</label>
+                </div>
+                <div class="col-md-4 col-sm-12">
+                    <img class="img-responsive" style="height: 400px;" src="/assets/images/pasosRedes/1.png"/>
+                </div>
+                <div class="col-md-4 col-sm-12">
+                    <img class="img-responsive" style="height: 400px;" src="/assets/images/pasosRedes/2.png"/>
+                </div>
+                <div class="col-md-4 col-sm-12">
+                    <img class="img-responsive" style="height: 400px;" src="/assets/images/pasosRedes/3.png"/>
+                </div>
+              </div>
+              <div id="instrucciones_tw" style="display: none;" class="row">
+                <div class="col-md-12 col-sm-12 col-xs-12">
+                <label>Pasos para obtener el código de la publicación en Twitter.</label>
+                </div>
+                <div class="col-md-4 col-sm-12">
+                    <img class="img-responsive" style="height: 400px;" src="/assets/images/pasosRedes/4.png"/>
+                </div>
+                <div class="col-md-4 col-sm-12">
+                    <img class="img-responsive" style="height: 400px;" src="/assets/images/pasosRedes/5.png"/>
+                </div>
+                <div class="col-md-4 col-sm-12">
+                    <img class="img-responsive" style="height: 400px;" src="/assets/images/pasosRedes/6.png"/>
+                </div>
+              </div>
+              <div id="instrucciones_yt" style="display: none;" class="row">
+                <div class="col-md-12 col-sm-12 col-xs-12">
+                <label>Pasos para obtener el código de la publicación en Youtube.</label>
+                </div>
+                <div class="col-md-4 col-sm-12">
+                    <img class="img-responsive" style="height: 400px;" src="/assets/images/pasosRedes/7.png"/>
+                </div>
+                <div class="col-md-4 col-sm-12">
+                    <img class="img-responsive" style="height: 400px;" src="/assets/images/pasosRedes/8.png"/>
+                </div>
+                <div class="col-md-4 col-sm-12">
+                    <img class="img-responsive" style="height: 400px;" src="/assets/images/pasosRedes/9.png"/>
+                </div>
+              </div>
+              <div id="instrucciones_tt" style="display: none;" class="row">
+                <div class="col-md-12 col-sm-12 col-xs-12">
+                <label>Pasos para obtener el código de la publicación en Tik tok.</label>
+                </div>
+                <div class="col-md-4 col-sm-12">
+                    <img class="img-responsive" style="height: 400px;" src="/assets/images/pasosRedes/10.png"/>
+                </div>
+                <div class="col-md-4 col-sm-12">
+                    <img class="img-responsive" style="height: 400px;" src="/assets/images/pasosRedes/11.png"/>
+                </div>
+              </div>
+                  <div class="form-group">
+                    <label>Pegue el código de la publicación </label>
+                    <textarea id="codigo_publicacion" class="form-control" onfocusout="cambiarVistaPrevia(this)"></textarea>
+                  </div>
                   <button type="button" class="btn btn-raised btn-primary" onclick="guardarinformacion()">Guardar
                     Información</button>
                   <div class="alert alert-danger" style="display: none;" role="alert"

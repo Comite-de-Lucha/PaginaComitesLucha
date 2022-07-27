@@ -89,6 +89,7 @@ function guardarNoticia() {
     data.append('fecha_noticia', $("#fecha_noticia").val());
     data.append('categoria_noticia', $("#noticia_categoria").val());
     data.append('descripcion_noticia', $("#descripcion_noticia").val());
+    data.append('publicacion_noticia', $("#codigo_publicacion").val());
     data.append('id', $("#editar").attr("idActualidad"));
 
     $.ajax({
@@ -168,5 +169,25 @@ function eliminar(id) {
             console.log('There was some error performing the AJAX call!');
         }
     });
+
+}
+
+function cambiarInstrucciones($this){
+    $("#instrucciones_fb").css("display", "none");
+    $("#instrucciones_tw").css("display", "none");
+    $("#instrucciones_yt").css("display", "none");
+    $("#instrucciones_tt").css("display", "none");
+    if ($($this).val()==="facebook"){
+        $("#instrucciones_fb").css("display", "");
+    }
+   else if ($($this).val()==="twitter"){
+        $("#instrucciones_tw").css("display", "");
+    }
+   else if ($($this).val()==="youtube"){
+        $("#instrucciones_yt").css("display", "");
+    }
+    else if ($($this).val()==="tiktok"){
+        $("#instrucciones_tt").css("display", "");
+    }
 
 }

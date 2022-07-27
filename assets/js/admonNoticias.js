@@ -87,6 +87,7 @@ function guardarNoticia() {
     data.append('fecha_noticia', $("#fecha_noticia").val());
     data.append('boton_noticia', $("#noticia-boton").val());
     data.append('descripcion_noticia', $("#descripcion_noticia").val());
+    data.append('publicacion_noticia', $("#codigo_publicacion").val());
     data.append('id', $("#editar").attr("idNoticia"));
 
     $.ajax({

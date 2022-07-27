@@ -11,23 +11,24 @@ $autor =  $_POST['autor_noticia'];
 $fecha =  $_POST['fecha_noticia'];
 $categoria =  $_POST['categoria_noticia'];
 $descripcion =  $_POST['descripcion_noticia'];
+$publicacion =  $_POST['publicacion_noticia'];
 $id =  $_POST['id'];
 
 if (empty($fecha)){
     $fecha=date('Y-m-d H:i:s');
 }
 
-if (0 < $_FILES['imagen_noticia']['error']) {
+if (isset($_FILES['imagen_noticia']) && 0 < $_FILES['imagen_noticia']['error']) {
     echo 'Error: ' . $_FILES['imagen_noticia']['error'] . '<br>';
 } else {
-    if (empty($_FILES['imagen_noticia']['name'])) {
+    if (!isset($_FILES['imagen_noticia'])) {
         //Subir datos
         if (empty($id)) {
-            $stmt = mysqli_prepare($mysqli, "INSERT INTO actualidad (titulo, autor, categoria, fecha,  descripcion) VALUES (?, ?, ?, ?, ?)");
-            mysqli_stmt_bind_param($stmt, "sssss", $titulo, $autor, $categoria, $fecha, $descripcion);
+            $stmt = mysqli_prepare($mysqli, "INSERT INTO actualidad (titulo, autor, categoria, fecha,  descripcion, publicacion) VALUES (?, ?, ?, ?, ?, ?)");
+            mysqli_stmt_bind_param($stmt, "ssssss", $titulo, $autor, $categoria, $fecha, $descripcion, $publicacion);
         } else {
-            $stmt = mysqli_prepare($mysqli, "UPDATE actualidad SET titulo=? , autor=?, categoria=?, fecha= ?, descripcion = ? WHERE actualidad_id = ?");
-            mysqli_stmt_bind_param($stmt, "sssssi", $titulo, $autor, $categoria, $fecha, $descripcion, $id);
+            $stmt = mysqli_prepare($mysqli, "UPDATE actualidad SET titulo=? , autor=?, categoria=?, fecha= ?, descripcion = ?, publicacion = ? WHERE actualidad_id = ?");
+            mysqli_stmt_bind_param($stmt, "ssssssi", $titulo, $autor, $categoria, $fecha, $descripcion, $publicacion, $id);
         }
     } else {
         //Subir archivo
@@ -41,11 +42,11 @@ if (0 < $_FILES['imagen_noticia']['error']) {
 
         //Subir datos
         if (empty($id)) {
-            $stmt = mysqli_prepare($mysqli, "INSERT INTO actualidad (titulo, autor, categoria, fecha,  descripcion, url_imagen) VALUES (?, ?, ?, ?, ?, ?)");
-            mysqli_stmt_bind_param($stmt, "ssssss",$titulo, $autor, $categoria, $fecha, $descripcion, $location);
+            $stmt = mysqli_prepare($mysqli, "INSERT INTO actualidad (titulo, autor, categoria, fecha,  descripcion, url_imagen, publicacion) VALUES (?, ?, ?, ?, ?, ?, ?)");
+            mysqli_stmt_bind_param($stmt, "sssssss",$titulo, $autor, $categoria, $fecha, $descripcion, $location, $publicacion);
         } else {
-            $stmt = mysqli_prepare($mysqli, "UPDATE actualidad SET  titulo=? , autor=?, categoria=?, fecha= ?, descripcion = ?, url_imagen = ? WHERE actualidad_id = ?");
-            mysqli_stmt_bind_param($stmt, "ssssssi",$titulo, $autor, $categoria, $fecha, $descripcion, $location, $id);
+            $stmt = mysqli_prepare($mysqli, "UPDATE actualidad SET  titulo=? , autor=?, categoria=?, fecha= ?, descripcion = ?, url_imagen = ?, publicacion = ? WHERE actualidad_id = ?");
+            mysqli_stmt_bind_param($stmt, "sssssssi",$titulo, $autor, $categoria, $fecha, $descripcion, $location, $publicacion, $id);
         }
     }
     /* execute query */

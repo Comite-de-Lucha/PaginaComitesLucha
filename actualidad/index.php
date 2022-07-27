@@ -243,9 +243,9 @@ $row_array["todos"] = $row['conteo'];
                             <h2>Categorías</h2>
                         </div>
                         <div class="social-profiles clearfix  wow animated slideInLeft" data-wow-delay=".2s">
-                        <a class="animated4 btn btn-common col-md-12 col-sm-12 col-xs-12" href="/actualidad/index.php">Todas <span id="null_noticias" class="badge"><? echo $row_array["todos"]?></span></a>
-                            <a class="animated4 btn btn-common btn-sm col-md-12 col-sm-12 col-xs-12" href="/actualidad/index.php?categoria=nacional">Nacional<span id="nacional_noticias"  class="badge"><? echo $row_array["nacional"]?></span></a>
-                            <a class="animated4 btn btn-common btn-sm col-md-12 col-sm-12 col-xs-12" href="/actualidad/index.php?categoria=internacional">Internacional <span id="internacional_noticias"  class="badge"><? echo $row_array["internacional"]?></span></a>
+                        <a class="animated4 btn btn-common col-md-12 col-sm-12 col-xs-12" href="/actualidad/index.php">Todas <span id="null_noticias" class="badge"><?php echo $row_array["todos"]?></span></a>
+                            <a class="animated4 btn btn-common btn-sm col-md-12 col-sm-12 col-xs-12" href="/actualidad/index.php?categoria=nacional">Nacional<span id="nacional_noticias"  class="badge"><?php echo $row_array["nacional"]?></span></a>
+                            <a class="animated4 btn btn-common btn-sm col-md-12 col-sm-12 col-xs-12" href="/actualidad/index.php?categoria=internacional">Internacional <span id="internacional_noticias"  class="badge"><?php echo $row_array["internacional"]?></span></a>
                             </div>
                     </aside>
                 </div>

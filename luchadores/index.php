@@ -247,13 +247,13 @@ $row_array["todos"] = $row['conteo'];
                             <h2>Categorías</h2>
                         </div>
                         <div class="social-profiles clearfix  wow animated slideInLeft" data-wow-delay=".2s">
-                        <a class="animated4 btn btn-common col-md-12 col-sm-12 col-xs-12" href="/luchadores/index.php">Todas <span id="null_noticias" class="badge"><? echo $row_array["todos"]?></span></a>
-                            <a class="animated4 btn btn-common btn-sm col-md-12 col-sm-12 col-xs-12" href="/luchadores/index.php?categoria=arte">Arte para el pueblo <span id="arte_noticias" class="badge"><? echo $row_array["arte"]?></span></a>
-                            <a class="animated4 btn btn-common btn-sm col-md-12 col-sm-12 col-xs-12" href="/luchadores/index.php?categoria=asambleas">Asambleas Populares <span id="asambleas_noticias" class="badge"><? echo $row_array["asambleas"]?></span></a>
-                            <a class="animated4 btn btn-common btn-sm col-md-12 col-sm-12 col-xs-12" href="/luchadores/index.php?categoria=regiones">Coordinación por regiones <span id="regiones_noticias" class="badge"><? echo $row_array["regiones"]?></span></a>
-                            <a class="animated4 btn btn-common btn-sm col-md-12 col-sm-12 col-xs-12" href="/luchadores/index.php?categoria=primera_linea">Primera Línea <span id="primera_linea_noticias" class="badge"><? echo $row_array["primera_linea"]?></span></a>
-                            <a class="animated4 btn btn-common btn-sm col-md-12 col-sm-12 col-xs-12" href="/luchadores/index.php?categoria=mujeres">Mujeres <span id="mujeres_noticias" class="badge"><? echo $row_array["mujeres"]?></span></a>
-                            <a class="animated4 btn btn-common btn-sm col-md-12 col-sm-12 col-xs-12" href="/luchadores/index.php?categoria=etnias">Campesinos, Indígenas y etnias <span id="etnias_noticias" class="badge"><? echo $row_array["etnias"]?></span></a>
+                        <a class="animated4 btn btn-common col-md-12 col-sm-12 col-xs-12" href="/luchadores/index.php">Todas <span id="null_noticias" class="badge"><?php echo $row_array["todos"]?></span></a>
+                            <a class="animated4 btn btn-common btn-sm col-md-12 col-sm-12 col-xs-12" href="/luchadores/index.php?categoria=arte">Arte para el pueblo <span id="arte_noticias" class="badge"><?php echo $row_array["arte"]?></span></a>
+                            <a class="animated4 btn btn-common btn-sm col-md-12 col-sm-12 col-xs-12" href="/luchadores/index.php?categoria=asambleas">Asambleas Populares <span id="asambleas_noticias" class="badge"><?php echo $row_array["asambleas"]?></span></a>
+                            <a class="animated4 btn btn-common btn-sm col-md-12 col-sm-12 col-xs-12" href="/luchadores/index.php?categoria=regiones">Coordinación por regiones <span id="regiones_noticias" class="badge"><?php echo $row_array["regiones"]?></span></a>
+                            <a class="animated4 btn btn-common btn-sm col-md-12 col-sm-12 col-xs-12" href="/luchadores/index.php?categoria=primera_linea">Primera Línea <span id="primera_linea_noticias" class="badge"><?php echo $row_array["primera_linea"]?></span></a>
+                            <a class="animated4 btn btn-common btn-sm col-md-12 col-sm-12 col-xs-12" href="/luchadores/index.php?categoria=mujeres">Mujeres <span id="mujeres_noticias" class="badge"><?php echo $row_array["mujeres"]?></span></a>
+                            <a class="animated4 btn btn-common btn-sm col-md-12 col-sm-12 col-xs-12" href="/luchadores/index.php?categoria=etnias">Campesinos, Indígenas y etnias <span id="etnias_noticias" class="badge"><?php echo $row_array["etnias"]?></span></a>
                  </div>
                     </aside>
                 </div>

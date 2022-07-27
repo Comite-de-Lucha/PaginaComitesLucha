@@ -92,6 +92,7 @@ function guardarinformacion() {
     data.append('subtitulo_info', $("#info-subtitulo").val());
     data.append('fecha_info', $("#fecha_info").val());
     data.append('descripcion_info', $("#descripcion_info").val());
+    data.append('publicacion_info', $("#codigo_publicacion").val());
     data.append('id', $("#editar").attr("idluchadores"));
 
     $.ajax({
@@ -212,4 +213,24 @@ function completarLuchadores(info, indice) {
     }
     
     $("#info-imagen-" + indice).attr("src", info["url_imagen"]);
+}
+
+function cambiarInstrucciones($this){
+    $("#instrucciones_fb").css("display", "none");
+    $("#instrucciones_tw").css("display", "none");
+    $("#instrucciones_yt").css("display", "none");
+    $("#instrucciones_tt").css("display", "none");
+    if ($($this).val()==="facebook"){
+        $("#instrucciones_fb").css("display", "");
+    }
+   else if ($($this).val()==="twitter"){
+        $("#instrucciones_tw").css("display", "");
+    }
+   else if ($($this).val()==="youtube"){
+        $("#instrucciones_yt").css("display", "");
+    }
+    else if ($($this).val()==="tiktok"){
+        $("#instrucciones_tt").css("display", "");
+    }
+
 }

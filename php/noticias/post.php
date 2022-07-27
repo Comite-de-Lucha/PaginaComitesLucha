@@ -11,23 +11,24 @@ $subtitulo =  $_POST['subtitulo_noticia'];
 $fecha =  $_POST['fecha_noticia'];
 $boton =  $_POST['boton_noticia'];
 $descripcion =  $_POST['descripcion_noticia'];
+$publicacion =  $_POST['publicacion_noticia'];
 $id =  $_POST['id'];
 
 if (empty($fecha)){
     $fecha=date('Y-m-d H:i:s');
 }
 
-if (0 < $_FILES['imagen_noticia']['error']) {
+if ( isset($_FILES['imagen_noticia']) && 0 < $_FILES['imagen_noticia']['error']) {
     echo 'Error: ' . $_FILES['imagen_noticia']['error'] . '<br>';
 } else {
-    if (empty($_FILES['imagen_noticia']['name'])) {
+    if (!isset($_FILES['imagen_noticia'])) {
         //Subir datos
         if (empty($id)) {
-            $stmt = mysqli_prepare($mysqli, "INSERT INTO noticias (titulo, subtitulo, boton, fecha,  descripcion) VALUES (?, ?, ?, ?, ?)");
-            mysqli_stmt_bind_param($stmt, "sssss", $titulo, $subtitulo, $boton, $fecha, $descripcion);
+            $stmt = mysqli_prepare($mysqli, "INSERT INTO noticias (titulo, subtitulo, boton, fecha,  descripcion, publicacion) VALUES (?, ?, ?, ?, ?, ?)");
+            mysqli_stmt_bind_param($stmt, "ssssss", $titulo, $subtitulo, $boton, $fecha, $descripcion, $publicacion);
         } else {
-            $stmt = mysqli_prepare($mysqli, "UPDATE noticias SET titulo=? , subtitulo=?, boton=?, fecha= ?, descripcion = ? WHERE noticia_id = ?");
-            mysqli_stmt_bind_param($stmt, "sssssi", $titulo, $subtitulo, $boton, $fecha, $descripcion, $id);
+            $stmt = mysqli_prepare($mysqli, "UPDATE noticias SET titulo=? , subtitulo=?, boton=?, fecha= ?, descripcion = ?, publicacion = ? WHERE noticia_id = ?");
+            mysqli_stmt_bind_param($stmt, "ssssssi", $titulo, $subtitulo, $boton, $fecha, $descripcion, $publicacion, $id);
         }
     } else {
         //Subir archivo
@@ -41,11 +42,11 @@ if (0 < $_FILES['imagen_noticia']['error']) {
 
         //Subir datos
         if (empty($id)) {
-            $stmt = mysqli_prepare($mysqli, "INSERT INTO noticias (titulo, subtitulo, boton, fecha,  descripcion, url_imagen) VALUES (?, ?, ?, ?, ?, ?)");
-            mysqli_stmt_bind_param($stmt, "ssssss",$titulo, $subtitulo, $boton, $fecha, $descripcion, $location);
+            $stmt = mysqli_prepare($mysqli, "INSERT INTO noticias (titulo, subtitulo, boton, fecha,  descripcion, publicacion, url_imagen) VALUES (?, ?, ?, ?, ?, ?, ?)");
+            mysqli_stmt_bind_param($stmt, "sssssss",$titulo, $subtitulo, $boton, $fecha, $descripcion, $publicacion, $location);
         } else {
-            $stmt = mysqli_prepare($mysqli, "UPDATE noticias SET  titulo=? , subtitulo=?, boton=?, fecha= ?, descripcion = ?, url_imagen = ? WHERE noticia_id = ?");
-            mysqli_stmt_bind_param($stmt, "ssssssi",$titulo, $subtitulo, $boton, $fecha, $descripcion, $location, $id);
+            $stmt = mysqli_prepare($mysqli, "UPDATE noticias SET  titulo=? , subtitulo=?, boton=?, fecha= ?, descripcion = ?, publicacion = ? url_imagen = ? WHERE noticia_id = ?");
+            mysqli_stmt_bind_param($stmt, "sssssssi",$titulo, $subtitulo, $boton, $fecha, $descripcion, $publicacion, $location, $id);
         }
     }
     /* execute query */
