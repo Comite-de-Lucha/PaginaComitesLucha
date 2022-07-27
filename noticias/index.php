@@ -234,7 +234,7 @@ $row_todos["todos"] = $row['conteo'];
                                         <a class="btn btn-round btn-fab url_noticia" href="blog-single.html"><i class="material-icons">&#xE5C8;</i><div class="ripple-container"></div></a>
                                     </div>
 
-                                    <a href="blog-single.html">
+                                    <a class="url_noticia"  href="blog-single.html">
                                         <h2 class="subtitle titulo_noticia">Lorem ipsum do lor sit amet, cosectetur adipisicing</h2>
                                     </a>
                                     <p><b class="subtitulo_noticia"></b></p>
