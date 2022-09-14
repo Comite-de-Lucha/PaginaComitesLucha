@@ -212,3 +212,23 @@ function MesAnhoSeleccionado(mesanho){
     $("#"+mesanho).removeClass("btn-default");
     $("#"+mesanho).addClass("btn-primary");
 }
+
+function subirImagen(image, editor) {
+    var data = new FormData();
+    data.append("image", image);
+    $.ajax({
+        url: "/php/imagenes/post.php",
+        cache: false,
+        contentType: false,
+        processData: false,
+        data: data,
+        type: "post",
+    success: function(url) {
+        var image = $('<img>').attr('src', url);
+        $(editor).summernote("insertNode", image[0]);
+    },
+    error: function(data) {
+        console.log(data);
+    }
+    });
+}
