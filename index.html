@@ -534,7 +534,7 @@
                     <div class="col-md-3 single-footer-widget wow animated fadeInUp mx-auto" data-wow-delay=".2s">
                         <div class="text-center">
                             <img src="/assets/images/icono.png" width="200px" />
-                            <a id="login" class="btn btn-common" href="/admon/index.html">
+                            <a id="login" class="btn btn-common" href="error.html">
                                 <i class="material-icons">login</i>Administrar</a>
                         </div>
                     </div>
@@ -651,6 +651,16 @@
     <script src="/assets/js/scriptCL.js"></script>
     <script>
         $(document).ready(function () {
+            $.ajax({
+                url: '/php/oauth/get.php',
+                success: function(data) {
+                    var json = $.parseJSON(data);
+                    $("#login").attr("href", json.href);
+                    },
+                error: function() {
+                console.log('There was some error performing the AJAX call!');
+                }
+            });
             $.ajax({
                 url: '/php/noticias/list.php',
                 data: { limit: 3 },

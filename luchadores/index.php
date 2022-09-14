@@ -271,7 +271,7 @@ $row_array["todos"] = $row['conteo'];
                     <div class="col-md-3 single-footer-widget wow animated fadeInUp mx-auto" data-wow-delay=".2s">
                         <div class="text-center">
                             <img src="/assets/images/icono.png" width="200px" />
-                            <a id="login" class="btn btn-common" href="/admon/index.html">
+                            <a id="login" class="btn btn-common" href="error.html">
                                 <i class="material-icons">login</i>Administrar</a>
                         </div>
                     </div>
