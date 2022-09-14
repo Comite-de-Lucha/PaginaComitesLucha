@@ -2,7 +2,10 @@
 
 include_once '../config/configparameters.php';
 
-session_start();
+if(!isset($_SESSION)) 
+    { 
+        session_start(); 
+    } 
 
 $now = time();
 if (!isset($_SESSION)) {

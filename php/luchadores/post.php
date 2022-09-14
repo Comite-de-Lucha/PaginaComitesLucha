@@ -2,6 +2,8 @@
 
 include_once '../config/configbd.php';
 include_once '../config/configparameters.php';
+include_once "../utils/session_required.php";
+include_once "../utils/session_extended.php";
 
 
 mysqli_report(MYSQLI_REPORT_ERROR | MYSQLI_REPORT_STRICT);
