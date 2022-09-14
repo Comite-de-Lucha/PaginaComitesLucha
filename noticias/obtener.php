@@ -339,6 +339,20 @@ $row = mysqli_fetch_array($result, MYSQLI_ASSOC);
     <script src="/assets/js/wow.js"></script>
     <script src="/assets/js/jquery.slicknav.js"></script>
     <script src="/assets/js/main.js"></script>
+    <script>
+    $(document).ready(function () {
+        $.ajax({
+            url: '/php/oauth/get.php',
+            success: function(data) {
+                var json = $.parseJSON(data);
+                $("#login").attr("href", json.href);
+                },
+            error: function() {
+            console.log('There was some error performing the AJAX call!');
+            }
+        });
+    });
+    </script>
 </body>
 
 </html>
