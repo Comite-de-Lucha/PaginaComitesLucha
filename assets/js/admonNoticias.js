@@ -36,6 +36,10 @@ $(document).ready(function() {
                 const bufferText = ((e.originalEvent || e).clipboardData || window.clipboardData).getData('Text');
                 e.preventDefault();
                 document.execCommand('insertText', false, bufferText);
+            },
+            onImageUpload: function(image) {
+                editor = $(this);
+                subirImagen(image[0], editor);
             }
         }
     });
