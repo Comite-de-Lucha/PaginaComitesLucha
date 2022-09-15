@@ -11,7 +11,7 @@ if ($_FILES['image']['name']) {
  $destination = 'upload/' . $filename;
  $location = $_FILES["image"]["tmp_name"];
  move_uploaded_file($location, $destination);
- $return_value = $path_imagenes . $filename;
+ $return_value = $path_imagenes . $destination;
  }else{
  $return_value = 'No pudimos guardar la imagen, presentó los siguientes problemas: '.$_FILES['image']['error'];
  }
