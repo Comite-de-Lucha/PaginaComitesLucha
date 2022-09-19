@@ -47,7 +47,7 @@ if ( isset($_FILES['imagen_noticia']) && 0 < $_FILES['imagen_noticia']['error'])
             $stmt = mysqli_prepare($mysqli, "INSERT INTO noticias (titulo, subtitulo, boton, fecha,  descripcion, publicacion, url_imagen) VALUES (?, ?, ?, ?, ?, ?, ?)");
             mysqli_stmt_bind_param($stmt, "sssssss",$titulo, $subtitulo, $boton, $fecha, $descripcion, $publicacion, $location);
         } else {
-            $stmt = mysqli_prepare($mysqli, "UPDATE noticias SET  titulo=? , subtitulo=?, boton=?, fecha= ?, descripcion = ?, publicacion = ? url_imagen = ? WHERE noticia_id = ?");
+            $stmt = mysqli_prepare($mysqli, "UPDATE noticias SET  titulo=? , subtitulo=?, boton=?, fecha= ?, descripcion = ?, publicacion = ?, url_imagen = ? WHERE noticia_id = ?");
             mysqli_stmt_bind_param($stmt, "sssssssi",$titulo, $subtitulo, $boton, $fecha, $descripcion, $publicacion, $location, $id);
         }
     }
