@@ -166,7 +166,6 @@
                     <textarea id="codigo_publicacion" class="form-control" onfocusout="cambiarVistaPrevia(this)"></textarea>
                   </div>
                   <button type="button" class="btn btn-raised btn-primary" onclick="guardarPublicacion()">
-                    <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true" id="spinner_guardar"></span>
                     <span>>Guardar Información</span>
                   </button>
                   <div class="alert alert-danger" style="display: none;" role="alert"
@@ -202,6 +201,7 @@
       </div>
     </div>
   </div>
+  <div id="spinner_guardar" class="loading" style="display:none">Loading&#8230;</div>
 
   <!-- Bootstrap core JavaScript
     ================================================== -->

@@ -214,6 +214,7 @@ function MesAnhoSeleccionado(mesanho){
 }
 
 function subirImagen(image, editor) {
+    $("#spinner_guardar").css("display", "");
     var data = new FormData();
     data.append("image", image);
     $.ajax({
@@ -224,10 +225,12 @@ function subirImagen(image, editor) {
         data: data,
         type: "post",
     success: function(url) {
+        $("#spinner_guardar").css("display", "none");
         var image = $('<img>').attr('src', url);
         $(editor).summernote("insertNode", image[0]);
     },
     error: function(data) {
+        $("#spinner_guardar").css("display", "none");
         console.log(data);
     }
     });
