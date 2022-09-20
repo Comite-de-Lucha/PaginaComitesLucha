@@ -98,6 +98,7 @@ function guardarinformacion() {
     data.append('descripcion_info', $("#descripcion_info").val());
     data.append('publicacion_info', $("#codigo_publicacion").val());
     data.append('id', $("#editar").attr("idluchadores"));
+    $("#spinner_guardar").css("display", "");
 
     $.ajax({
         url: '/php/luchadores/post.php',
@@ -107,6 +108,7 @@ function guardarinformacion() {
         contentType: false,
         processData: false,
         success: function(data) {
+            $("#spinner_guardar").css("display", "none");
             var json = $.parseJSON(data);
             if (json.resultado === "ok") {
                 window.location.href = json.publicacion;
@@ -121,6 +123,7 @@ function guardarinformacion() {
             }
         },
         error: function() {
+            $("#spinner_guardar").css("display", "none");
             $("#problema_creando_info").css("display", "");
             console.log('There was some error performing the AJAX call!');
         }

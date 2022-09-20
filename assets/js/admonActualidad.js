@@ -95,7 +95,8 @@ function guardarNoticia() {
     data.append('descripcion_noticia', $("#descripcion_noticia").val());
     data.append('publicacion_noticia', $("#codigo_publicacion").val());
     data.append('id', $("#editar").attr("idActualidad"));
-
+    $("#spinner_guardar").css("display", "");
+    
     $.ajax({
         url: '/php/actualidad/post.php',
         method: 'POST',
@@ -104,6 +105,7 @@ function guardarNoticia() {
         contentType: false,
         processData: false,
         success: function(data) {
+            $("#spinner_guardar").css("display", "none");
             var json = $.parseJSON(data);
             if (json.resultado === "ok") {
                 window.location.href = json.publicacion;
@@ -118,6 +120,7 @@ function guardarNoticia() {
             }
         },
         error: function() {
+            $("#spinner_guardar").css("display", "none");
             $("#problema_creando_noticia").css("display", "");
             console.log('There was some error performing the AJAX call!');
         }

@@ -67,6 +67,7 @@ function guardarPublicacion() {
     data.append('categoria_publicacion', $("#publicacion_categoria").val());
     data.append('codigo_publicacion', $("#codigo_publicacion").val());
     data.append('id', $("#editar").attr("idPublicacion"));
+    $("#spinner_guardar").css("display", "");
 
     $.ajax({
         url: '/php/publicacion/post.php',
@@ -76,6 +77,7 @@ function guardarPublicacion() {
         contentType: false,
         processData: false,
         success: function(data) {
+            $("#spinner_guardar").css("display", "none");
             var json = $.parseJSON(data);
             if (json.resultado === "ok") {
                 window.location.href = json.publicacion;
@@ -90,6 +92,7 @@ function guardarPublicacion() {
             }
         },
         error: function() {
+            $("#spinner_guardar").css("display", "none");
             $("#problema_creando_publicacion").css("display", "");
             console.log('There was some error performing the AJAX call!');
         }
