@@ -1,7 +1,7 @@
 $(document).ready(function() {
     $.ajax({
         url: '/php/luchadores/list.php',
-        data: { limit: 5, offset: (findGetParameter("pagina") - 1) * 5 },
+        data: { limit: 5, offset: 0 },
         success: function(data) {
             var json = $.parseJSON(data);
             $(json.resultados).each(
@@ -51,8 +51,8 @@ $(document).ready(function() {
 
 });
 function cargarMas() {
-    var indice=parseInt($("#cargar_mas").attr("indice"));
-    $("#cargar_mas").attr("indice", indice+1);
+    var indice=parseInt($("#cargar_mas").attr("indice"))+1;
+    $("#cargar_mas").attr("indice", indice);
     $.ajax({
         url: '/php/luchadores/list.php',
         data: { limit: 5, offset: indice * 5 },
@@ -77,7 +77,7 @@ function cargarMas() {
                         recortar(this.descripcion, 200) +
                         '</td></tr>')
                 });
-            if (json.resultados === ""){
+            if (json.resultados.length === 0){
                 $("#cargar_mas").addClass("d-none");
             }
             calcularPaginacion(json.total, findGetParameter("pagina"), '/admon/noticias.html?');
