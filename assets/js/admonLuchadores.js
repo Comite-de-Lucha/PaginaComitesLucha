@@ -7,7 +7,11 @@ $(document).ready(function() {
             $(json.resultados).each(
                 function() {
                     $('#lista_examinar > tbody').append(
-                        '<tr><td>' +
+                        '<tr><td class="text-center">' +
+                        '<span class="clickeable material-icons" onClick="editar(' + this.luchadores_id + ')">edit</span>' +
+                        '</td><td class="text-center">' +
+                        '<span class="clickeable material-icons" onClick="eliminar(' + this.luchadores_id + ')">delete</span>' +
+                        '</td><td>' +
                         parsearCategoriaLuchadores(this.categoria) +
                         '</td><td>' +
                         this.titulo +
@@ -17,10 +21,6 @@ $(document).ready(function() {
                         this.fecha +
                         '</td><td>' +
                         recortar(this.descripcion, 200) +
-                        '</td><td class="text-center">' +
-                        '<span class="clickeable material-icons" onClick="editar(' + this.luchadores_id + ')">edit</span>' +
-                        '</td><td class="text-center">' +
-                        '<span class="clickeable material-icons" onClick="eliminar(' + this.luchadores_id + ')">delete</span>' +
                         '</td></tr>')
                 });
             calcularPaginacion(json.total, findGetParameter("pagina"), '/admon/luchadores.html?');
@@ -50,6 +50,44 @@ $(document).ready(function() {
     $('#fecha_info').datetimepicker({timepicker:false, format:'Y/m/d'});
 
 });
+function cargarMas() {
+    var indice=parseInt($("#cargar_mas").attr("indice"));
+    $("#cargar_mas").attr("indice", indice+1);
+    $.ajax({
+        url: '/php/luchadores/list.php',
+        data: { limit: 5, offset: indice * 5 },
+        success: function(data) {
+            var json = $.parseJSON(data);
+            $(json.resultados).each(
+                function() {
+                    $('#lista_examinar > tbody').append(
+                        '<tr><td class="text-center">' +
+                        '<span class="clickeable material-icons" onClick="editar(' + this.luchadores_id + ')">edit</span>' +
+                        '</td><td class="text-center">' +
+                        '<span class="clickeable material-icons" onClick="eliminar(' + this.luchadores_id + ')">delete</span>' +
+                        '</td><td>' +
+                        parsearCategoriaLuchadores(this.categoria) +
+                        '</td><td>' +
+                        this.titulo +
+                        '</td><td>' +
+                        parsearPrioridad(this.prioridad) +
+                        '</td><td>' +
+                        this.fecha +
+                        '</td><td>' +
+                        recortar(this.descripcion, 200) +
+                        '</td></tr>')
+                });
+            if (json.resultados === ""){
+                $("#cargar_mas").addClass("d-none");
+            }
+            calcularPaginacion(json.total, findGetParameter("pagina"), '/admon/noticias.html?');
+
+        },
+        error: function() {
+            console.log('There was some error performing the AJAX call!');
+        }
+    });
+}
 
 function agregarNuevaInformacion() {
     $("#editar").css("display", "");

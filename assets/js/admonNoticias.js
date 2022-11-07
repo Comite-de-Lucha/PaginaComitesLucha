@@ -1,22 +1,22 @@
 $(document).ready(function() {
     $.ajax({
         url: '/php/noticias/list.php',
-        data: { limit: 5, offset: (findGetParameter("pagina") - 1) * 5 },
+        data: { limit: 5, offset: 0 },
         success: function(data) {
             var json = $.parseJSON(data);
             $(json.resultados).each(
                 function() {
                     $('#lista_examinar > tbody').append(
-                        '<tr><td>' +
+                        '<tr><td class="text-center">' +
+                        '<span class="clickeable material-icons" onClick="editar(' + this.noticia_id + ')">edit</span>' +
+                        '</td><td class="text-center">' +
+                        '<span class="clickeable material-icons" onClick="eliminar(' + this.noticia_id + ')">delete</span>' +
+                        '</td><td>' +
                         this.titulo +
                         '</td><td>' +
                         this.fecha +
                         '</td><td>' +
                         recortar(this.descripcion, 200) +
-                        '</td><td class="text-center">' +
-                        '<span class="clickeable material-icons" onClick="editar(' + this.noticia_id + ')">edit</span>' +
-                        '</td><td class="text-center">' +
-                        '<span class="clickeable material-icons" onClick="eliminar(' + this.noticia_id + ')">delete</span>' +
                         '</td></tr>')
                 });
             calcularPaginacion(json.total, findGetParameter("pagina"), '/admon/noticias.html?');
@@ -46,6 +46,41 @@ $(document).ready(function() {
     $('#fecha_noticia').datetimepicker({timepicker:false, format:'Y/m/d'});
 
 });
+
+function cargarMas() {
+    var indice=parseInt($("#cargar_mas").attr("indice"));
+    $("#cargar_mas").attr("indice", indice+1);
+    $.ajax({
+        url: '/php/noticias/list.php',
+        data: { limit: 5, offset: indice * 5 },
+        success: function(data) {
+            var json = $.parseJSON(data);
+            $(json.resultados).each(
+                function() {
+                    $('#lista_examinar > tbody').append(
+                        '<tr><td class="text-center">' +
+                        '<span class="clickeable material-icons" onClick="editar(' + this.noticia_id + ')">edit</span>' +
+                        '</td><td class="text-center">' +
+                        '<span class="clickeable material-icons" onClick="eliminar(' + this.noticia_id + ')">delete</span>' +
+                        '</td><td>' +
+                        this.titulo +
+                        '</td><td>' +
+                        this.fecha +
+                        '</td><td>' +
+                        recortar(this.descripcion, 200) +
+                        '</td></tr>')
+                });
+            if (json.resultados === ""){
+                $("#cargar_mas").addClass("d-none");
+            }
+            calcularPaginacion(json.total, findGetParameter("pagina"), '/admon/noticias.html?');
+
+        },
+        error: function() {
+            console.log('There was some error performing the AJAX call!');
+        }
+    });
+}
 
 function agregarNuevaNoticia() {
     $("#editar").css("display", "");
